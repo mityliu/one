@@ -1,0 +1,82 @@
+.Grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  &.is-top {
+    align-items: flex-start;
+  }
+  &.is-middle {
+    align-items: center;
+  }
+  &.is-bottom {
+    align-items: flex-end;
+  }
+  &.is-stretch {
+    align-items: stretch;
+  }
+  &.is-baseline {
+    align-items: baseline;
+  }
+  &.is-left {
+    justify-content: flex-start;
+  }
+  &.is-center {
+    justify-content: center;
+  }
+  &.is-right {
+    justify-content: flex-end;
+  }
+  &.is-between {
+    justify-content: space-between;
+  }
+  &.is-around {
+    justify-content: space-around;
+  }
+}
+
+.Cell {
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  &.is-fill {
+    width: 0;
+    min-width: 0;
+    flex-grow: 1;
+  }
+  &.is-1 {
+    width: calc(100% * 1 / 12);
+  }
+  &.is-2 {
+    width: calc(100% * 2 / 12);
+  }
+  &.is-3 {
+    width: calc(100% * 3 / 12);
+  }
+  &.is-4 {
+    width: calc(100% * 4 / 12);
+  }
+  &.is-5 {
+    width: calc(100% * 5 / 12);
+  }
+  &.is-6 {
+    width: calc(100% * 6 / 12);
+  }
+  &.is-7 {
+    width: calc(100% * 7 / 12);
+  }
+  &.is-8 {
+    width: calc(100% * 8 / 12);
+  }
+  &.is-9 {
+    width: calc(100% * 9 / 12);
+  }
+  &.is-10 {
+    width: calc(100% * 10 / 12);
+  }
+  &.is-11 {
+    width: calc(100% * 11 / 12);
+  }
+  &.is-12 {
+    width: 100%;
+  }
+}
