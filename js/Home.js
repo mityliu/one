@@ -1,15 +1,20 @@
 import { h, Component } from 'preact';
+import { useRef } from 'preact/hooks';
 
 export default class Home extends Component {
-  constructor() {
-    super();
-    this.state = { isSearchActive: false };
-  }
+  input = useRef(null);
+  state = { isSearchActive: false };
 
   toggleSearch = () => {
+    const isSearchActive = !this.state.isSearchActive;
+
     this.setState({
-      isSearchActive: !this.state.isSearchActive
+      isSearchActive
     });
+
+    if (isSearchActive) {
+      this.input.current.focus();
+    }
   };
 
   render(_, { isSearchActive }) {
@@ -39,29 +44,9 @@ export default class Home extends Component {
               class="search-input"
               name="search"
               type="search"
-              placeholder=""
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              spellcheck="false"
+              placeholder="搜索"
+              ref={this.input}
             />
-          </div>
-
-          <div class="search__related">
-            <div class="search__suggestion">
-              <h3>May We Suggest?</h3>
-              <p>
-                #drone #funny #catgif #broken #lost #hilarious #good #red #blue
-                #nono #why #yes #yesyes #aliens #green
-              </p>
-            </div>
-            <div class="search__suggestion">
-              <h3>Needle, Where Art Thou?</h3>
-              <p>
-                #broken #lost #good #red #funny #lala #hilarious #catgif #blue
-                #nono #why #yes #yesyes #aliens #green #drone
-              </p>
-            </div>
           </div>
         </div>
       </div>
