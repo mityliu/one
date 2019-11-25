@@ -52,10 +52,15 @@ export default class Home extends Component {
         isApp: true
       });
 
-      this.setAppBarColor(this.state.appBarColor);
+      let interval;
+      let count = 0;
 
-      setTimeout(function() {
+      interval = setInterval(function() {
         this.setAppBarColor(this.state.appBarColor);
+
+        if (count++ > 6) {
+          clearInterval(interval);
+        }
       }, 500);
     }
   }
