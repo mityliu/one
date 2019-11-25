@@ -1,25 +1,54 @@
 import { h, Component } from 'preact';
 import { useRef } from 'preact/hooks';
+import linkState from 'linkstate';
 
 export default class Home extends Component {
   input = useRef(null);
-  state = { isSearchActive: false };
+  state = {
+    isSearchActive: false,
+    q: '',
+    searches: [
+      '多吉 https://www.dogedoge.com/results?q=',
+      'Magi https://magi.com/search?q=',
+      'Google https://www.google.com/search?q='
+    ]
+  };
 
   toggleSearch = () => {
     const isSearchActive = !this.state.isSearchActive;
+    const input = this.input.current;
 
     this.setState({
       isSearchActive
     });
 
     if (isSearchActive) {
-      this.input.current.focus();
+      input.focus();
     } else {
-      this.input.current.value = '';
+      input.value = '';
     }
   };
 
-  render(_, { isSearchActive }) {
+  searchGo = s => {
+    location.href = s.url + this.state.q;
+  };
+
+  render(_, { isSearchActive, searches, q }) {
+    const SS = searches.map(s => {
+      const ls = s.trim().split(/\s+/);
+      const name =
+        ls.length > 1
+          ? ls[0]
+          : s.match(/[\/\.]([^\.]+)\.\w+\//)[1].replace(/^(\w)/, function(v) {
+              return v.toUpperCase();
+            });
+
+      return {
+        name,
+        url: ls.pop()
+      };
+    });
+
     return (
       <div class="app">
         <main
@@ -35,20 +64,19 @@ export default class Home extends Component {
               type="search"
               placeholder="搜索"
               ref={this.input}
+              value={q}
+              onInput={linkState(this, 'q')}
             />
-          </div>
-
-          <div class="O-content">
-            <div class="O-column">
-              <h2>分组名</h2>
-              <a class="O-media-object" href="http://twitter.com/SaraSoueidan">
-                <img
-                  class="round"
-                  src="https://0.gravatar.com/avatar/81b58502541f9445253f30497e53c280?s=50&amp;d=identicon&amp;r=G"
-                  alt="Sara Soueidan"
-                />
-                <h3>Sara Soueidan</h3>
-              </a>
+            <div class="buttons">
+              {SS.map(s => (
+                <button
+                  onClick={() => this.searchGo(s)}
+                  class="button is-info is-outlined"
+                  disabled={!q}
+                >
+                  {s.name}
+                </button>
+              ))}
             </div>
           </div>
 

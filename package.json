@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "copy-text-to-clipboard": "^2.1.1",
+    "linkstate": "^1.1.1",
     "normalize.css": "^8.0.1",
     "preact": "^10.0.5"
   },
