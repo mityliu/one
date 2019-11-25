@@ -36,6 +36,7 @@ export default class Home extends Component {
   };
 
   searchGo = s => {
+    // TODO enter default
     location.href = s.url + this.state.q;
   };
 
