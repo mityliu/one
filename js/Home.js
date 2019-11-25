@@ -53,6 +53,10 @@ export default class Home extends Component {
       });
 
       this.setAppBarColor(this.state.appBarColor);
+
+      setTimeout(function() {
+        this.setAppBarColor(this.state.appBarColor);
+      }, 500);
     }
   }
 
