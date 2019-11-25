@@ -1,3 +1,14 @@
+html {
+  overflow-y: auto;
+}
+
+body {
+  background: url(https://ps.ssl.qhmsg.com/t01e73b80bae10c934e.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
 .icon {
   width: 2em;
   height: 2em;
@@ -5,13 +16,6 @@
   fill: currentColor;
   cursor: pointer;
   display: inline-block;
-}
-
-.app {
-  background: url(https://ps.ssl.qhmsg.com/t01e73b80bae10c934e.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
 }
 
 /* clears the 'X' from Internet Explorer */
