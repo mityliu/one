@@ -78,9 +78,7 @@ export default class Home extends Component {
       <div class="app">
         <main
           class={(isSearchActive ? 'is-move ' : '') + 'hero is-fullheight home'}
-        >
-          <div class="hero-body"></div>
-        </main>
+        ></main>
 
         <div class={(isSearchActive ? 'is-active ' : '') + 'O-search'}>
           <div class="O-field">
