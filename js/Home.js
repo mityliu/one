@@ -7,7 +7,8 @@ export default class Home extends Component {
   state = {
     isSearchActive: false,
     q: '',
-    appbarColor: '#e5e5e5',
+    appBarColor: '#e3e3e3',
+    panelColor: '#f1f1f1',
     isApp: false,
     searches: [
       '多吉 https://www.dogedoge.com/results?q=',
@@ -26,13 +27,22 @@ export default class Home extends Component {
 
     if (isSearchActive) {
       input.focus();
+
+      this.setAppBarColor(this.state.panelColor);
     } else {
       input.value = '';
+      this.setAppBarColor(this.state.appBarColor);
     }
   };
 
   searchGo = s => {
     location.href = s.url + this.state.q;
+  };
+
+  setAppBarColor = color => {
+    if (this.state.isApp) {
+      window.fy_bridge_app.setAppBarColor(color || this.state.appBarColor);
+    }
   };
 
   componentDidMount() {
@@ -42,7 +52,7 @@ export default class Home extends Component {
         isApp: true
       });
 
-      window.fy_bridge_app.setAppBarColor(this.state.appbarColor);
+      this.setAppBarColor(this.state.appBarColor);
     }
   }
 
