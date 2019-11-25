@@ -114,21 +114,6 @@ body {
   fill: currentColor;
   cursor: pointer;
   display: inline-block;
-
-  &-search {
-    color: #f59f00;
-    position: absolute;
-    top: 2em;
-    right: 2em;
-    transition: opacity 0.5s;
-  }
-
-  &-close {
-    color: #f59f00;
-    position: absolute;
-    top: 2em;
-    right: 2em;
-  }
 }
 
 .app {
@@ -137,87 +122,132 @@ body {
   background-size: cover;
 }
 
-.home {
-  position: relative;
-  transition: transform 0.5s;
-
-  &.is-move {
-    transform: scale3d(0.7, 0.7, 1);
-
-    .icon-search {
-      opacity: 0;
-    }
-  }
+/* clears the 'X' from Internet Explorer */
+input.hide-clear[type='search']::-ms-clear,
+input.hide-clear[type='search']::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
 }
 
-.search {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  position: fixed;
-  z-index: 1000;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 100vh;
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.4s, transform 0.4s;
-  transform: scale3d(0.7, 0.7, 1);
-  color: #eaba82;
+/* clears the 'X' from Chrome */
+input.hide-clear[type='search']::-webkit-search-decoration,
+input.hide-clear[type='search']::-webkit-search-cancel-button,
+input.hide-clear[type='search']::-webkit-search-results-button,
+input.hide-clear[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
 
-  &.is-active {
-    opacity: 1;
-    pointer-events: auto;
-    transform: scale3d(1, 1, 1);
+.O {
+  &-search {
+    width: 200px;
+    min-height: 40px;
+    position: absolute;
+    z-index: 10000;
+    top: 50px;
+    right: 50px;
+    background: transparent;
+    transform-origin: 100% 0;
+    transition-property: background, min-height, width, top, right;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
 
-    & > * {
-      transform: translate3d(0, 0, 0);
-    }
+    &.is-active {
+      width: 100%;
+      min-height: 100%;
+      top: 0px;
+      right: 0px;
+      background: #f1f1f1;
 
-    &::before {
-      opacity: 1;
-    }
+      .O-field {
+        width: 80%;
+        height: 100px;
+        transform: translate3d(0, 3em, 0);
+      }
 
-    .search-input {
-      transform: scale3d(1, 1, 1);
-      transition-duration: 0.5s;
+      .O-input {
+        font-size: 2em;
+      }
+
+      .O-field {
+        opacity: 1;
+        pointer-events: auto;
+        transition: opacity 0.3s, transform 0.3s;
+        transition-delay: 0.5s;
+      }
+
+      .O-content {
+        opacity: 1;
+        height: auto;
+        overflow: visible;
+        pointer-events: auto;
+        transition: opacity 0.3s 0.5s;
+      }
+
+      .O-close-search {
+        color: #dddddd;
+      }
     }
   }
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
+  &-field {
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    opacity: 0;
-    transition: opacity 0.5s;
+    height: 40px;
+    margin: 0 auto;
+    position: relative;
+    transition-property: width, height, transform;
+    transition-duration: 0.5s;
+    transition-timing-function: cubic-bezier(0.7, 0, 0.3, 1);
   }
 
   &-input {
-    font-size: 10vw;
-    line-height: 1;
-    display: inline-block;
-    box-sizing: border-box;
-    width: 75%;
-    padding: 0.05em 0;
-    color: #eaba82;
-    border: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 25% 0 10px;
+    font-weight: 700;
+    border: none;
     background: transparent;
-    border-radius: 0;
-    -webkit-appearance: none;
-    border-bottom: 5px solid;
-    transform: scale3d(0, 1, 1);
-    transform-origin: 0% 50%;
-    transition: transform 0.3s;
+    font-size: 0.8em;
+    color: #ec5a62;
+    transition: font-size 0.5s cubic-bezier(0.7, 0, 0.3, 1);
 
     &:focus {
       outline: none;
     }
+
+    /* placeholder */
+    &::-webkit-input-placeholder,
+    &:-moz-placeholder,
+    &::-moz-placeholder,
+    &:-ms-input-placeholder {
+      color: #c2c2c2;
+    }
+  }
+
+  &-content {
+    color: #333;
+    margin-top: 4.5em;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    padding: 0 10.5%;
+    background: #f1f1f1;
+    position: absolute;
+  }
+
+  &-field,
+  &-content {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &-close-search {
+    position: absolute;
+    right: 1em;
+    top: 0.5em;
+    font-size: 1.25em;
+    color: #4caf50;
+    cursor: pointer;
+    transition: color 1s ease;
   }
 }
