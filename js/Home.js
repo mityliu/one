@@ -7,6 +7,8 @@ export default class Home extends Component {
   state = {
     isSearchActive: false,
     q: '',
+    appbarColor: '#e5e5e5',
+    isApp: false,
     searches: [
       '多吉 https://www.dogedoge.com/results?q=',
       'Magi https://magi.com/search?q=',
@@ -32,6 +34,17 @@ export default class Home extends Component {
   searchGo = s => {
     location.href = s.url + this.state.q;
   };
+
+  componentDidMount() {
+    console.log('One page loaded.');
+    if (window.fy_bridge_app) {
+      this.setState({
+        isApp: true
+      });
+
+      window.fy_bridge_app.setAppBarColor(this.state.appbarColor);
+    }
+  }
 
   render(_, { isSearchActive, searches, q }) {
     const SS = searches.map(s => {
