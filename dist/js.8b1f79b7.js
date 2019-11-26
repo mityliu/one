@@ -17,4 +17,4 @@ function _typeof2(t){return(_typeof2="function"==typeof Symbol&&"symbol"==typeof
 },{}],"QvaY":[function(require,module,exports) {
 "use strict";require("normalize.css"),require("../styles/main.scss");var e=require("preact"),r=u(require("./Home"));function u(e){return e&&e.__esModule?e:{default:e}}require("./stats"),(0,e.render)((0,e.h)(r.default,null),document.body);
 },{"normalize.css":"KIJD","../styles/main.scss":"LDUH","preact":"u8ui","./Home":"qPEW","./stats":"R7oY"}]},{},["QvaY"], null)
-//# sourceMappingURL=/one/js.b0f01971.js.map
+//# sourceMappingURL=/one/js.8b1f79b7.js.map
