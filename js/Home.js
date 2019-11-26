@@ -18,7 +18,7 @@ const searchIcon = (
   </svg>
 );
 
-const tagIcon = (
+const shortcutIcon = (
   <svg
     viewBox="0 0 32 32"
     fill="none"
@@ -42,7 +42,7 @@ const settingIcon = (
     stroke="currentcolor"
     stroke-linecap="round"
     stroke-linejoin="round"
-    stroke-width="3"
+    stroke-width="2"
     class="icon-svg"
   >
     <path
@@ -113,6 +113,17 @@ export default class Home extends Component {
   };
 
   togglePanel = panelName => {
+    const $currPage = $('.page.is-active');
+    const $nextPage = $('.page.is-' + (panelName || 'home'));
+
+    $currPage.addClass('hide');
+    $nextPage.addClass('is-half-active');
+
+    setTimeout(function() {
+      $currPage.removeClass('is-active hide');
+      $nextPage.removeClass('is-half-active').addClass('is-active');
+    }, 1400);
+
     if (this.state.activePanel === 'home') {
       if (panelName === 'search') {
         this.openSearchPanel();
@@ -168,18 +179,19 @@ export default class Home extends Component {
       };
     });
 
-    return (
-      <div class="app">
-        <main class={activePanel !== 'home' ? 'is-hide ' : ''}></main>
+    const isHomePanelActive = activePanel === 'home';
+    // const isSearchPanelActive = activePanel === 'search';
+    // const isShortcutPanelActive = activePanel === 'shortcut';
+    // const isSettingPanelActive = activePanel === 'setting';
 
-        <div
-          class={
-            (activePanel === 'search' ? 'is-active ' : '') + 'O-panel is-search'
-          }
-        >
-          <div class="O-field">
+    return (
+      <div class="one">
+        <main class="page is-home is-active"></main>
+
+        <section class="page is-search">
+          <div class="field">
             <input
-              class="O-input hide-clear"
+              class="input hide-clear"
               type="search"
               placeholder="搜索"
               ref={this.input}
@@ -198,52 +210,37 @@ export default class Home extends Component {
               ))}
             </div>
           </div>
+        </section>
 
-          <div class="O-close">
-            <span
-              class="icon is-close"
-              onClick={() => this.togglePanel('search')}
-            >
-              {activePanel === 'search' ? closeIcon : searchIcon}
-            </span>
-          </div>
-        </div>
-
-        <div
-          class={
-            (activePanel === 'shortcut' ? 'is-active ' : '') +
-            'O-panel is-shortcut'
-          }
-        >
+        <section class="page is-shortcut">
           <div>shortcut</div>
+        </section>
 
-          <div class="O-close">
-            <span
-              class="icon is-close"
-              onClick={() => this.togglePanel('shortcut')}
-            >
-              {activePanel === 'shortcut' ? closeIcon : tagIcon}
-            </span>
-          </div>
-        </div>
-
-        <div
-          class={
-            (activePanel === 'setting' ? 'is-active ' : '') +
-            'O-panel is-setting'
-          }
-        >
+        <section class="page is-setting">
           <div>setting</div>
+        </section>
 
-          <div class="O-close">
-            <span
-              class="icon is-close"
-              onClick={() => this.togglePanel('setting')}
-            >
-              {activePanel === 'setting' ? closeIcon : settingIcon}
+        <nav class="actions">
+          {isHomePanelActive ? (
+            <div class="icons">
+              <span class="icon" onClick={() => this.togglePanel('search')}>
+                {searchIcon}
+              </span>
+
+              <span class="icon" onClick={() => this.togglePanel('shortcut')}>
+                {shortcutIcon}
+              </span>
+
+              <span class="icon" onClick={() => this.togglePanel('setting')}>
+                {settingIcon}
+              </span>
+            </div>
+          ) : (
+            <span class="icon is-close" onClick={() => this.togglePanel()}>
+              {closeIcon}
             </span>
-          </div>
-        </div>
+          )}
+        </nav>
       </div>
     );
   }
