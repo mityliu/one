@@ -1,11 +1,76 @@
 import { h, Component } from 'preact';
 import { useRef } from 'preact/hooks';
 import linkState from 'linkstate';
+import $ from 'cash-dom';
+
+const searchIcon = (
+  <svg
+    viewBox="0 0 32 32"
+    fill="none"
+    stroke="currentcolor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+    class="icon-svg"
+  >
+    <circle cx="14" cy="14" r="12"></circle>
+    <path d="M23 23 L30 30"></path>
+  </svg>
+);
+
+const tagIcon = (
+  <svg
+    viewBox="0 0 32 32"
+    fill="none"
+    stroke="currentcolor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+    class="icon-svg"
+  >
+    <circle cx="24" cy="8" r="2"></circle>
+    <path data-v-3480f8cd="" d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
+  </svg>
+);
+
+const settingIcon = (
+  <svg
+    viewBox="0 0 32 32"
+    width="32"
+    height="32"
+    fill="none"
+    stroke="currentcolor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+    class="icon-svg"
+  >
+    <path
+      data-v-3480f8cd=""
+      d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z"
+    ></path>
+    <circle cx="16" cy="16" r="4"></circle>
+  </svg>
+);
+
+const closeIcon = (
+  <svg
+    viewBox="0 0 32 32"
+    fill="none"
+    stroke="currentcolor"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="3"
+    class="icon-svg"
+  >
+    <path d="M2 30 L30 2 M30 30 L2 2"></path>
+  </svg>
+);
 
 export default class Home extends Component {
   input = useRef(null);
   state = {
-    isSearchActive: false,
+    activePanel: 'home',
     q: '',
     appBarColor: '#e3e3e3',
     panelColor: '#f1f1f1f9',
@@ -17,21 +82,47 @@ export default class Home extends Component {
     ]
   };
 
-  toggleSearch = () => {
-    const isSearchActive = !this.state.isSearchActive;
-    const input = this.input.current;
-
+  closePanel = () => {
     this.setState({
-      isSearchActive
+      activePanel: 'home'
     });
 
-    if (isSearchActive) {
-      input.focus();
+    this.input.current.value = '';
+    this.setAppBarColor(this.state.appBarColor);
+  };
 
-      this.setAppBarColor(this.state.panelColor);
+  openPanel = panelName => {
+    this.setState({
+      activePanel: panelName
+    });
+    this.setAppBarColor(this.state.panelColor);
+  };
+
+  openSearchPanel = () => {
+    this.openPanel('search');
+
+    this.input.current.focus();
+  };
+
+  openShortcutPanel = () => {
+    this.openPanel('shortcut');
+  };
+
+  openSettingPanel = () => {
+    this.openPanel('setting');
+  };
+
+  togglePanel = panelName => {
+    if (this.state.activePanel === 'home') {
+      if (panelName === 'search') {
+        this.openSearchPanel();
+      } else if (panelName === 'shortcut') {
+        this.openShortcutPanel();
+      } else if (panelName === 'setting') {
+        this.openSettingPanel();
+      }
     } else {
-      input.value = '';
-      this.setAppBarColor(this.state.appBarColor);
+      this.closePanel();
     }
   };
 
@@ -56,10 +147,12 @@ export default class Home extends Component {
       setTimeout(() => {
         this.setAppBarColor();
       }, 200);
+
+      $('body').addClass('is-app');
     }
   }
 
-  render(_, { isSearchActive, searches, q }) {
+  render(_, { activePanel, searches, q }) {
     const SS = searches.map(s => {
       const ls = s.trim().split(/\s+/);
       const name =
@@ -77,11 +170,13 @@ export default class Home extends Component {
 
     return (
       <div class="app">
-        <main
-          class={(isSearchActive ? 'is-move ' : '') + 'hero is-fullheight home'}
-        ></main>
+        <main class={activePanel !== 'home' ? 'is-hide ' : ''}></main>
 
-        <div class={(isSearchActive ? 'is-active ' : '') + 'O-search'}>
+        <div
+          class={
+            (activePanel === 'search' ? 'is-active ' : '') + 'O-panel is-search'
+          }
+        >
           <div class="O-field">
             <input
               class="O-input hide-clear"
@@ -104,17 +199,48 @@ export default class Home extends Component {
             </div>
           </div>
 
-          <div class="O-close-search">
-            <span class="icon is-close" onClick={this.toggleSearch}>
-              {isSearchActive ? (
-                <svg viewBox="0 0 24 24">
-                  <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path>
-                </svg>
-              ) : (
-                <svg viewBox="0 0 24 24">
-                  <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
-                </svg>
-              )}
+          <div class="O-close">
+            <span
+              class="icon is-close"
+              onClick={() => this.togglePanel('search')}
+            >
+              {activePanel === 'search' ? closeIcon : searchIcon}
+            </span>
+          </div>
+        </div>
+
+        <div
+          class={
+            (activePanel === 'shortcut' ? 'is-active ' : '') +
+            'O-panel is-shortcut'
+          }
+        >
+          <div>shortcut</div>
+
+          <div class="O-close">
+            <span
+              class="icon is-close"
+              onClick={() => this.togglePanel('shortcut')}
+            >
+              {activePanel === 'shortcut' ? closeIcon : tagIcon}
+            </span>
+          </div>
+        </div>
+
+        <div
+          class={
+            (activePanel === 'setting' ? 'is-active ' : '') +
+            'O-panel is-setting'
+          }
+        >
+          <div>setting</div>
+
+          <div class="O-close">
+            <span
+              class="icon is-close"
+              onClick={() => this.togglePanel('setting')}
+            >
+              {activePanel === 'setting' ? closeIcon : settingIcon}
             </span>
           </div>
         </div>

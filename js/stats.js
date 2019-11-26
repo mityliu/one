@@ -1,4 +1,6 @@
 (function() {
+  if (location.host.includes('localhost')) return;
+
   var config = { itv: 1800000, url1: '//ia.51.la/go1?id=20235553', ekc: '' };
   !(function(e) {
     function t(r) {

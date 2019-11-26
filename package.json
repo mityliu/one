@@ -21,6 +21,7 @@
     ]
   },
   "dependencies": {
+    "cash-dom": "^4.1.5",
     "copy-text-to-clipboard": "^2.1.1",
     "linkstate": "^1.1.1",
     "milligram": "^1.3.0",
