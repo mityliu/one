@@ -55,7 +55,7 @@ export default class Home extends Component {
 
       setTimeout(() => {
         this.setAppBarColor();
-      }, 500);
+      }, 200);
     }
   }
 

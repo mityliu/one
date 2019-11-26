@@ -6,7 +6,8 @@
   "author": "Ecruos <ecruos@outlook.com>",
   "scripts": {
     "dev": "parcel index.html --open",
-    "build": "parcel build index.html --public-url /one/"
+    "build": "parcel build index.html --public-url /one/ && mv ./favicon.ico ./dist/",
+    "build:local": "parcel build index.html && mv ./favicon.ico ./dist/"
   },
   "husky": {
     "hooks": {
@@ -26,14 +27,13 @@
     "preact": "^10.0.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-0",
+    "@babel/core": "^7.7.4",
     "@babel/preset-react": "^7.7.4",
     "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "husky": "^3.1.0",
     "lint-staged": "^9.4.3",
     "parcel": "^1.12.4",
-    "parcel-plugin-sw-precache": "^1.1.1",
     "prettier": "^1.19.1",
     "sass": "^1.23.7"
   }
