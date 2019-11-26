@@ -6,8 +6,8 @@
   "author": "Ecruos <ecruos@outlook.com>",
   "scripts": {
     "dev": "parcel index.html --open",
-    "build": "parcel build index.html --public-url /one/ && mv ./favicon.ico ./dist/",
-    "build:local": "parcel build index.html && mv ./favicon.ico ./dist/"
+    "build": "parcel build index.html --public-url /one/ && cp ./favicon.ico ./dist/favicon.ico",
+    "build:local": "parcel build index.html && cp ./favicon.ico ./dist/favicon.ico"
   },
   "husky": {
     "hooks": {
@@ -23,6 +23,7 @@
   "dependencies": {
     "copy-text-to-clipboard": "^2.1.1",
     "linkstate": "^1.1.1",
+    "milligram": "^1.3.0",
     "normalize.css": "^8.0.1",
     "preact": "^10.0.5"
   },

@@ -8,7 +8,7 @@ export default class Home extends Component {
     isSearchActive: false,
     q: '',
     appBarColor: '#e3e3e3',
-    panelColor: '#f1f1f1',
+    panelColor: '#f1f1f1f9',
     isApp: false,
     searches: [
       '多吉 https://www.dogedoge.com/results?q=',
@@ -47,7 +47,7 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
-    console.log('One page loaded.');
+    console.log('One page loaded  (o˘◡˘o)');
     if (window.fy_bridge_app) {
       this.setState({
         isApp: true
