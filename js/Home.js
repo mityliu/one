@@ -189,15 +189,7 @@ export default class Home extends Component {
         <main class="page is-home is-active"></main>
 
         <section class="page is-search">
-          <div class="field">
-            <input
-              class="input hide-clear"
-              type="search"
-              placeholder="搜索"
-              ref={this.input}
-              value={q}
-              onInput={linkState(this, 'q')}
-            />
+          <div class="search-row">
             <div class="buttons">
               {SS.map(s => (
                 <button
@@ -208,6 +200,17 @@ export default class Home extends Component {
                   {s.name}
                 </button>
               ))}
+            </div>
+
+            <div class="field">
+              <input
+                class="input hide-clear"
+                type="search"
+                placeholder="搜索"
+                ref={this.input}
+                value={q}
+                onInput={linkState(this, 'q')}
+              />
             </div>
           </div>
         </section>
