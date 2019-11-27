@@ -1,4 +1,7 @@
 body {
+  font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
   font-size: 16px;
 
   // tmp
@@ -8,35 +11,27 @@ body {
   }
 }
 
-.home {
-  background: url(https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 100vh;
-}
-
 .icon {
   align-items: center;
   display: inline-flex;
   justify-content: center;
   height: 1.5rem;
   width: 1.5rem;
-}
 
-.icon.is-small {
-  height: 1rem;
-  width: 1rem;
-}
+  &.is-small {
+    height: 1rem;
+    width: 1rem;
+  }
 
-.icon.is-medium {
-  height: 2rem;
-  width: 2rem;
-}
+  &.is-medium {
+    height: 2rem;
+    width: 2rem;
+  }
 
-.icon.is-large {
-  height: 3rem;
-  width: 3rem;
+  &.is-large {
+    height: 3rem;
+    width: 3rem;
+  }
 }
 
 .one {
@@ -47,7 +42,7 @@ body {
   .actions-nav {
     position: absolute;
     right: 0.25em;
-    bottom: 2em;
+    bottom: 1em;
     z-index: 9999;
     color: #1971c2;
 
@@ -110,6 +105,63 @@ body {
     &.is-home {
       z-index: 25;
     }
+
+    &.is-setting {
+      display: flex;
+      align-items: flex-end;
+    }
+  }
+
+  .panel {
+    background-color: #f8f9fa;
+    padding: 0.5em 1.5em 1em;
+    width: 100%;
+    z-index: 2;
+    position: relative;
+
+    .top-avatar {
+      position: absolute;
+      top: -6em;
+      right: 0.5em;
+
+      img {
+        max-width: 200px;
+      }
+    }
+
+    .item {
+      display: flex;
+      padding: 1em 0;
+
+      .name,
+      .value {
+        flex: 1;
+      }
+
+      .name {
+        color: #343a40;
+        font-weight: bold;
+      }
+
+      .value {
+        text-align: right;
+        color: #868e96;
+      }
+
+      & + .item {
+        border-top: 1px solid #dee2e6;
+      }
+    }
+
+    .copyright {
+      width: 100%;
+      text-align: center;
+      color: #ced4da;
+
+      span {
+        margin: 0 0.5em;
+      }
+    }
   }
 }
 
@@ -160,7 +212,7 @@ body {
 
 .has-mask {
   &::before {
-    background: rgba(5, 0, 0, 0.5);
+    background: rgba(99, 99, 99, 0.5);
     width: 100%;
     min-height: 100%;
     position: absolute;
@@ -182,7 +234,7 @@ body {
     input {
       border: 0;
       width: 100%;
-      padding: 0.75em 1em;
+      padding: 1em;
       font-size: 1.15em;
 
       &:focus {

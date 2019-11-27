@@ -109,7 +109,9 @@ export default class Home extends Component {
     appBarColor: '#e3e3e3',
     panelColor: '#f1f1f1f9',
     isApp: false,
-    searches: defaultSearches
+    searches: defaultSearches,
+    htmlTitle: '🐱 One',
+    searchHint: '搜索'
   };
 
   closePanel = () => {
@@ -161,6 +163,12 @@ export default class Home extends Component {
         this.openShortcutPanel();
       } else if (panelName === 'setting') {
         this.openSettingPanel();
+
+        if (!$('.top-avatar img').data('loaded')) {
+          $('.top-avatar img')
+            .attr('src', $('.top-avatar img').attr('data-src'))
+            .data('loaded', true);
+        }
       }
     } else {
       this.closePanel();
@@ -194,7 +202,7 @@ export default class Home extends Component {
     }
   }
 
-  render(_, { activePanel, searches, q }) {
+  render(_, { activePanel, searches, q, htmlTitle, searchHint }) {
     const SS = searches
       .trim()
       .split(/\n+/)
@@ -257,7 +265,7 @@ export default class Home extends Component {
               <input
                 class="input hide-clear"
                 type="search"
-                placeholder="搜索"
+                placeholder={searchHint}
                 ref={this.input}
                 value={q}
                 onInput={linkState(this, 'q')}
@@ -284,8 +292,49 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <section class="page is-setting">
-          <div>setting</div>
+        <section class="page is-setting has-mask">
+          <div class="panel">
+            <div class="top-avatar">
+              <img data-src="https://ae01.alicdn.com/kf/H28e6b174bc904fc0bfad14aba7380b5dk.png" />
+            </div>
+            <div class="item">
+              <div class="name">
+                <span>标题</span>
+              </div>
+              <div class="value">
+                <span>{htmlTitle}</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="name">
+                <span>搜索提示语</span>
+              </div>
+              <div class="value">
+                <span>{searchHint}</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="name">
+                <span>搜索引擎</span>
+              </div>
+              <div class="value">
+                <span>点击编辑</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="name">
+                <span>书签链接</span>
+              </div>
+              <div class="value">
+                <span>点击编辑</span>
+              </div>
+            </div>
+            <div class="item">
+              <div class="copyright">
+                One<span>-</span>v0.1.1127<span>-</span>(o˘◡˘o)
+              </div>
+            </div>
+          </div>
         </section>
 
         <nav class="actions-nav">
