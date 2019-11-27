@@ -6,8 +6,8 @@
   "author": "Ecruos <ecruos@outlook.com>",
   "scripts": {
     "dev": "parcel index.html --open",
-    "build": "parcel build index.html --public-url /one/ && cp ./favicon.ico ./dist/favicon.ico",
-    "build:local": "parcel build index.html && cp ./favicon.ico ./dist/favicon.ico"
+    "build": "rm -rf ./dist && parcel build index.html --public-url /one/ && cp ./favicon.ico ./dist/favicon.ico",
+    "build:local": "rm -rf ./dist && parcel build index.html && cp ./favicon.ico ./dist/favicon.ico"
   },
   "husky": {
     "hooks": {

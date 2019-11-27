@@ -6,6 +6,8 @@ import $ from 'cash-dom';
 const searchIcon = (
   <svg
     viewBox="0 0 32 32"
+    width="32"
+    height="32"
     fill="none"
     stroke="currentcolor"
     stroke-linecap="round"
@@ -21,6 +23,8 @@ const searchIcon = (
 const shortcutIcon = (
   <svg
     viewBox="0 0 32 32"
+    width="32"
+    height="32"
     fill="none"
     stroke="currentcolor"
     stroke-linecap="round"
@@ -56,6 +60,8 @@ const settingIcon = (
 const closeIcon = (
   <svg
     viewBox="0 0 32 32"
+    width="24"
+    height="24"
     fill="none"
     stroke="currentcolor"
     stroke-linecap="round"
@@ -122,7 +128,7 @@ export default class Home extends Component {
     setTimeout(function() {
       $currPage.removeClass('is-active hide');
       $nextPage.removeClass('is-half-active').addClass('is-active');
-    }, 1400);
+    }, 1000);
 
     if (this.state.activePanel === 'home') {
       if (panelName === 'search') {
@@ -149,6 +155,7 @@ export default class Home extends Component {
   };
 
   componentDidMount() {
+    // TODO default bg -> lazy load new bg
     console.log('One page loaded  (o˘◡˘o)');
     if (window.fy_bridge_app) {
       this.setState({
@@ -223,9 +230,9 @@ export default class Home extends Component {
           <div>setting</div>
         </section>
 
-        <nav class="actions">
+        <nav class="actions-nav">
           {isHomePanelActive ? (
-            <div class="icons">
+            <div class="actions">
               <span class="icon" onClick={() => this.togglePanel('search')}>
                 {searchIcon}
               </span>
