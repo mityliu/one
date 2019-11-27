@@ -85,10 +85,16 @@ body {
     top: 0;
     left: 0;
     z-index: 10;
-    background: url(../static/default_bg.jpg);
+    background: url(https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    // background: #f8f9fa;
+    // background: url(../static/default_bg.jpg);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-position: center;
 
     &.is-half-active {
       z-index: 20;
@@ -108,12 +114,20 @@ body {
     }
 
     &.is-home {
-      background: url(https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg);
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
       z-index: 25;
     }
+  }
+}
+
+.has-mask {
+  &::before {
+    background: rgba(5, 0, 0, 0.5);
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    content: '';
   }
 }
 

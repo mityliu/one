@@ -195,7 +195,7 @@ export default class Home extends Component {
       <div class="one">
         <main class="page is-home is-active"></main>
 
-        <section class="page is-search">
+        <section class="page is-search has-mask">
           <div class="search-row">
             <div class="buttons">
               {SS.map(s => (
@@ -222,7 +222,7 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <section class="page is-shortcut">
+        <section class="page is-shortcut has-mask">
           <div>shortcut</div>
         </section>
 
