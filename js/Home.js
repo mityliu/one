@@ -103,15 +103,21 @@ function getUrlName(url) {
 
 export default class Home extends Component {
   input = useRef(null);
+  textarea = useRef(null);
+
   state = {
     activePanel: 'home',
     q: '',
     appBarColor: '#e3e3e3',
-    panelColor: '#f1f1f1f9',
+    panelColor: '#9e9e9e',
     isApp: false,
     searches: defaultSearches,
+    links: defaultLinks,
     htmlTitle: '🐱 One',
-    searchHint: '搜索'
+    searchHint: '搜索',
+    isEditorActive: false,
+    editorTitle: '',
+    editorKey: ''
   };
 
   closePanel = () => {
@@ -186,6 +192,24 @@ export default class Home extends Component {
     }
   };
 
+  closeEditor = () => {
+    this.setState({
+      isEditorActive: false
+    });
+  };
+
+  openEditor = (key, title) => {
+    this.setState({
+      isEditorActive: true,
+      editorKey: key,
+      editorTitle: title
+    });
+
+    setTimeout(() => {
+      this.textarea.current.focus();
+    }, 500);
+  };
+
   componentDidMount() {
     // TODO default bg -> lazy load new bg
     console.log('One page loaded  (o˘◡˘o)');
@@ -202,7 +226,25 @@ export default class Home extends Component {
     }
   }
 
-  render(_, { activePanel, searches, q, htmlTitle, searchHint }) {
+  render(_, state) {
+    const {
+      activePanel,
+      searches,
+      links,
+      q,
+      htmlTitle,
+      searchHint,
+      isEditorActive,
+      editorTitle,
+      editorKey
+    } = state;
+
+    const editorValue = state[editorKey];
+
+    if (editorKey === 'htmlTitle') {
+      document.title = editorValue;
+    }
+
     const SS = searches
       .trim()
       .split(/\n+/)
@@ -216,7 +258,7 @@ export default class Home extends Component {
         };
       });
 
-    const shortcuts = defaultLinks.split(/\n{2,}/).map(link => {
+    const shortcuts = links.split(/\n{2,}/).map(link => {
       const data = {};
       link
         .trim()
@@ -297,7 +339,10 @@ export default class Home extends Component {
             <div class="top-avatar">
               <img data-src="https://ae01.alicdn.com/kf/H28e6b174bc904fc0bfad14aba7380b5dk.png" />
             </div>
-            <div class="item">
+            <div
+              class="item"
+              onClick={() => this.openEditor('htmlTitle', '标题')}
+            >
               <div class="name">
                 <span>标题</span>
               </div>
@@ -305,7 +350,10 @@ export default class Home extends Component {
                 <span>{htmlTitle}</span>
               </div>
             </div>
-            <div class="item">
+            <div
+              class="item"
+              onClick={() => this.openEditor('searchHint', '搜索提示语')}
+            >
               <div class="name">
                 <span>搜索提示语</span>
               </div>
@@ -313,7 +361,10 @@ export default class Home extends Component {
                 <span>{searchHint}</span>
               </div>
             </div>
-            <div class="item">
+            <div
+              class="item"
+              onClick={() => this.openEditor('searches', '搜索引擎')}
+            >
               <div class="name">
                 <span>搜索引擎</span>
               </div>
@@ -321,7 +372,10 @@ export default class Home extends Component {
                 <span>点击编辑</span>
               </div>
             </div>
-            <div class="item">
+            <div
+              class="item"
+              onClick={() => this.openEditor('links', '书签链接')}
+            >
               <div class="name">
                 <span>书签链接</span>
               </div>
@@ -336,6 +390,30 @@ export default class Home extends Component {
             </div>
           </div>
         </section>
+
+        <div class={(isEditorActive ? 'is-active ' : '') + 'modal editor'}>
+          <div
+            class="modal-background"
+            onClick={() => this.closeEditor()}
+          ></div>
+          <div class="modal-content">
+            <div class="box">
+              <div class="editor-title">
+                {editorTitle}
+                <span class="icon is-close" onClick={() => this.closeEditor()}>
+                  {closeIcon}
+                </span>
+              </div>
+              <textarea
+                class="textarea"
+                placeholder="One"
+                ref={this.textarea}
+                value={editorValue}
+                onInput={linkState(this, editorKey)}
+              ></textarea>
+            </div>
+          </div>
+        </div>
 
         <nav class="actions-nav">
           {isHomePanelActive ? (
