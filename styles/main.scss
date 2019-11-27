@@ -90,12 +90,6 @@ body {
     background-size: cover;
     background-position: center;
 
-    // background: #f8f9fa;
-    // background: url(../static/default_bg.jpg);
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-position: center;
-
     &.is-half-active {
       z-index: 20;
     }
@@ -109,12 +103,57 @@ body {
       mask: url(../static/nature-sprite.png);
       -webkit-mask-size: 2300% 100%;
       mask-size: 2300% 100%;
-      -webkit-animation: mask-play 1s steps(22) forwards;
-      animation: mask-play 1s steps(22) forwards;
+      -webkit-animation: mask-play 0.8s steps(22) forwards;
+      animation: mask-play 0.8s steps(22) forwards;
     }
 
     &.is-home {
       z-index: 25;
+    }
+  }
+}
+
+.shortcut {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  z-index: 1;
+
+  &s {
+    min-height: 100vh;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .name {
+    margin-top: 0.5em;
+    background-color: rgba(239, 250, 243, 0.75);
+    color: #257942;
+    border-radius: 4px;
+    padding: 0.25em 0.5em 0.2em;
+    font-size: 0.85em;
+  }
+
+  .avatar {
+    width: 3em;
+    height: 3em;
+    background-position: center;
+    background-size: 3em;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    display: block;
+    overflow: hidden;
+
+    &.is-text {
+      font-size: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #eee;
+      color: green;
     }
   }
 }

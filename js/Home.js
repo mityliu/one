@@ -73,6 +73,34 @@ const closeIcon = (
   </svg>
 );
 
+const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
+https://magi.com/search?q=
+https://www.google.com/search?q=`;
+
+const defaultLinks = `知乎
+https://www.zhihu.com
+https://www.zhihu.com/favicon.ico
+
+哔哩
+https://m.bilibili.com
+https://www.bilibili.com/favicon.ico
+
+豆瓣
+https://m.douban.com
+https://www.douban.com/favicon.ico
+
+https://www.iqiyi.com`;
+
+function getUrlName(url) {
+  return url
+    .match(/\/\/([^\/]+)\/?/)[1]
+    .split('.')
+    .slice(-2, -1)[0]
+    .replace(/^(\w)/, function(v) {
+      return v.toUpperCase();
+    });
+}
+
 export default class Home extends Component {
   input = useRef(null);
   state = {
@@ -81,11 +109,7 @@ export default class Home extends Component {
     appBarColor: '#e3e3e3',
     panelColor: '#f1f1f1f9',
     isApp: false,
-    searches: [
-      '多吉 https://www.dogedoge.com/results?q=',
-      'Magi https://magi.com/search?q=',
-      'Google https://www.google.com/search?q='
-    ]
+    searches: defaultSearches
   };
 
   closePanel = () => {
@@ -171,19 +195,39 @@ export default class Home extends Component {
   }
 
   render(_, { activePanel, searches, q }) {
-    const SS = searches.map(s => {
-      const ls = s.trim().split(/\s+/);
-      const name =
-        ls.length > 1
-          ? ls[0]
-          : s.match(/[\/\.]([^\.]+)\.\w+\//)[1].replace(/^(\w)/, function(v) {
-              return v.toUpperCase();
-            });
+    const SS = searches
+      .trim()
+      .split(/\n+/)
+      .map(s => {
+        const ls = s.trim().split(/\s+/);
+        const name = ls.length > 1 ? ls[0] : getUrlName(s);
 
-      return {
-        name,
-        url: ls.pop()
-      };
+        return {
+          name,
+          url: ls.pop()
+        };
+      });
+
+    const shortcuts = defaultLinks.split(/\n{2,}/).map(link => {
+      const data = {};
+      link
+        .trim()
+        .split(/\n/)
+        .forEach(l => {
+          if (/\.(ico|png|jpe?g|gif)/.test(l)) {
+            data.image = l;
+          } else if (/\/\/|\.\w+\./.test(l)) {
+            data.url = l;
+          } else {
+            data.name = l;
+          }
+        });
+
+      if (data.url && !data.name) {
+        data.name = getUrlName(data.url);
+      }
+
+      return data;
     });
 
     const isHomePanelActive = activePanel === 'home';
@@ -223,7 +267,21 @@ export default class Home extends Component {
         </section>
 
         <section class="page is-shortcut has-mask">
-          <div>shortcut</div>
+          <div class="shortcuts">
+            {shortcuts.map(s => (
+              <a class="shortcut" href={s.url}>
+                {s.image ? (
+                  <span
+                    class="avatar"
+                    style={'background-image:url(' + s.image + ')'}
+                  ></span>
+                ) : (
+                  <span class="avatar is-text">{s.name[0]}</span>
+                )}
+                <span class="name">{s.name}</span>
+              </a>
+            ))}
+          </div>
         </section>
 
         <section class="page is-setting">
