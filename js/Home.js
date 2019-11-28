@@ -135,6 +135,7 @@ export default class Home extends Component {
     q: '',
     appBarColor: '#e3e3e3',
     panelColor: '#9e9e9e',
+    yijuPanelColor: '#535353',
     isApp: false,
     searches: '',
     links: '',
@@ -155,14 +156,18 @@ export default class Home extends Component {
     });
 
     this.input.current.value = '';
-    this.setAppBarColor(this.state.appBarColor);
+    this.setAppBarColor();
   };
 
   openPanel = panelName => {
     this.setState({
       activePanel: panelName
     });
-    this.setAppBarColor(this.state.panelColor);
+    this.setAppBarColor(
+      this.state.isYijuActive
+        ? this.state.yijuPanelColor
+        : this.state.panelColor
+    );
   };
 
   openSearchPanel = () => {
@@ -238,7 +243,12 @@ export default class Home extends Component {
 
   setAppBarColor = color => {
     if (this.state.isApp) {
-      window.fy_bridge_app.setAppBarColor(color || this.state.appBarColor);
+      if (!color) {
+        color = this.state.isYijuActive
+          ? this.state.yijuPanelColor
+          : this.state.appBarColor;
+      }
+      window.fy_bridge_app.setAppBarColor(color);
     }
   };
 
@@ -304,6 +314,7 @@ export default class Home extends Component {
     this.setState({
       isYijuActive: !this.state.isYijuActive
     });
+    this.setAppBarColor();
   };
 
   componentDidMount() {
