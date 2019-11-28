@@ -244,10 +244,6 @@ export default class Home extends Component {
       .removeClass('is-info')
       .addClass('is-danger')
       .removeAttr('disabled');
-
-    setTimeout(() => {
-      this.textarea.current.focus();
-    }, 500);
   };
 
   editorInput = (e, key) => {
