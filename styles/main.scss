@@ -480,7 +480,7 @@ textarea {
   &.is-loaded {
     // opacity: 0;
     // z-index: -1;
-    // pointer-events: none;
+    pointer-events: none;
 
     -webkit-mask: url(../static/nature-sprite.png);
     mask: url(../static/nature-sprite.png);
