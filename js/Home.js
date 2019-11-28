@@ -199,6 +199,18 @@ export default class Home extends Component {
         this.openSearchPanel();
       } else if (panelName === 'shortcut') {
         this.openShortcutPanel();
+
+        if (!$('.shortcuts').data('loaded')) {
+          $('.shortcuts .avatar').each(function(i, el) {
+            if ($(el).attr('data-style')) {
+              $(el)
+                .attr('style', $(el).attr('data-style'))
+                .removeClass('is-text');
+            }
+          });
+
+          $('.shortcuts').data('loaded', true);
+        }
       } else if (panelName === 'setting') {
         this.openSettingPanel();
 
@@ -410,8 +422,10 @@ export default class Home extends Component {
                   {s.image ? (
                     <span
                       class="avatar"
-                      style={'background-image:url(' + s.image + ')'}
-                    ></span>
+                      data-style={'background-image:url(' + s.image + ')'}
+                    >
+                      {s.name[0]}
+                    </span>
                   ) : (
                     <span class="avatar is-text">{s.name[0]}</span>
                   )}
