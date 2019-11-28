@@ -324,7 +324,10 @@ export default class Home extends Component {
 
   syncStore = () => {
     defaultsKey.forEach(key => {
-      const value = store(key) || defaults[key];
+      let value = store(key);
+      if (value === null) {
+        value = defaults[key];
+      }
 
       this.setState({
         [key]: value
@@ -352,17 +355,25 @@ export default class Home extends Component {
   };
 
   toggleYiju = () => {
+    const isYijuActive = !this.state.isYijuActive;
+
     this.setState({
-      isYijuActive: !this.state.isYijuActive
+      isYijuActive
     });
     this.setAppBarColor();
+
+    store('isYijuActive', isYijuActive);
   };
 
   toggleHomeShortcuts = () => {
+    const isHomeShortcuts = !this.state.isHomeShortcuts;
+
     this.setState({
-      isHomeShortcuts: !this.state.isHomeShortcuts
+      isHomeShortcuts
     });
     this.setAppBarColor();
+
+    store('isHomeShortcuts', isHomeShortcuts);
   };
 
   componentDidMount() {
