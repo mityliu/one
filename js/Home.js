@@ -122,6 +122,7 @@ function getUrlName(url) {
 }
 
 const defaultsKey = ['searches', 'links', 'htmlTitle', 'searchHint'];
+const hasSearchKeyRegex = /%s|\*\*/;
 
 export default class Home extends Component {
   input = useRef(null);
@@ -211,7 +212,9 @@ export default class Home extends Component {
 
   searchGo = s => {
     // TODO enter default
-    location.href = s.url + this.state.q;
+    location.href = hasSearchKeyRegex.test(s.url)
+      ? s.url.replace(this.state.q)
+      : s.url + this.state.q;
   };
 
   setAppBarColor = color => {
