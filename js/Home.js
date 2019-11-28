@@ -97,7 +97,22 @@ https://www.bilibili.com/favicon.ico
 https://m.douban.com
 https://www.douban.com/favicon.ico
 
-https://www.iqiyi.com`;
+腾讯
+https://m.v.qq.com
+http://v.qq.com/favicon.ico
+
+https://www.iqiyi.com
+
+https://www.youku.com
+
+https://www.nfmovies.com
+
+https://www.duboku.net
+
+https://1090ys.com
+
+云播
+https://m.yunbtv.com`;
 
 const defaultHtmlTitle = '🐱 One';
 const defaultSearchHint = '搜索';
@@ -109,7 +124,8 @@ const defaults = {
   htmlTitle: defaultHtmlTitle,
   searchHint: defaultSearchHint,
   bgUrls: defaultBgUrls,
-  isYijuActive: true
+  isYijuActive: true,
+  isHomeShortcuts: true
 };
 
 let tmpTaker;
@@ -151,17 +167,20 @@ export default class Home extends Component {
     isReseted: false,
     isLoaded: false,
     isYijuActive: defaults.isYijuActive,
+    isHomeShortcuts: defaults.isHomeShortcuts,
     bgUrls: '',
     bgUrl: ''
   };
 
   closePanel = () => {
     this.setState({
-      activePanel: 'home'
+      activePanel: 'home',
+      isReseted: false
     });
 
     this.input.current.value = '';
     this.setAppBarColor();
+    this.reset();
   };
 
   openPanel = panelName => {
@@ -214,17 +233,13 @@ export default class Home extends Component {
       } else if (panelName === 'shortcut') {
         this.openShortcutPanel();
 
-        if (!$('.shortcuts').data('loaded')) {
-          $('.shortcuts .avatar').each(function(i, el) {
-            if ($(el).attr('data-style')) {
-              $(el)
-                .attr('style', $(el).attr('data-style'))
-                .removeClass('is-text');
-            }
-          });
-
-          $('.shortcuts').data('loaded', true);
-        }
+        $('.is-shortcut .shortcuts .avatar[data-style]').each(function(i, el) {
+          $(el)
+            .attr('style', $(el).attr('data-style'))
+            .removeClass('is-text')
+            .attr('data-loaded', '')
+            .removeAttr('data-style');
+        });
       } else if (panelName === 'setting') {
         this.openSettingPanel();
 
@@ -273,6 +288,10 @@ export default class Home extends Component {
       isReseted: false
     });
 
+    this.reset();
+  };
+
+  reset = () => {
     $('.long-press.is-reset')
       .removeClass('is-info')
       .addClass('is-danger')
@@ -339,8 +358,14 @@ export default class Home extends Component {
     this.setAppBarColor();
   };
 
+  toggleHomeShortcuts = () => {
+    this.setState({
+      isHomeShortcuts: !this.state.isHomeShortcuts
+    });
+    this.setAppBarColor();
+  };
+
   componentDidMount() {
-    // TODO default bg -> lazy load new bg
     console.log('One page loaded  (o˘◡˘o)');
     if (window.fy_bridge_app) {
       this.setState({
@@ -378,9 +403,10 @@ export default class Home extends Component {
       isReseted,
       isLoaded,
       isYijuActive,
+      isHomeShortcuts,
       bgUrl
     } = state;
-    console.log('render');
+
     if (!isFirstChecked) {
       this.syncStore();
 
@@ -509,10 +535,10 @@ export default class Home extends Component {
 
             <div
               class="item"
-              onClick={() => this.openEditor('htmlTitle', '标题')}
+              onClick={() => this.openEditor('htmlTitle', '网页标题')}
             >
               <div class="name">
-                <span>标题</span>
+                <span>网页标题</span>
               </div>
               <div class="value">
                 <span>{htmlTitle}</span>
@@ -521,10 +547,10 @@ export default class Home extends Component {
 
             <div
               class="item"
-              onClick={() => this.openEditor('searchHint', '搜索提示语')}
+              onClick={() => this.openEditor('searchHint', '搜索提示')}
             >
               <div class="name">
-                <span>搜索提示语</span>
+                <span>搜索提示</span>
               </div>
               <div class="value">
                 <span>{searchHint}</span>
@@ -558,14 +584,27 @@ export default class Home extends Component {
             <div
               class="item"
               onClick={() =>
-                this.openEditor('bgUrls', '背景图（支持多个链接）')
+                this.openEditor('bgUrls', '背景图（支持多个链接，需刷新）')
               }
             >
               <div class="name">
-                <span>背景图</span>
+                <span>背景图片</span>
               </div>
               <div class="value">
                 <span>点击编辑</span>
+              </div>
+            </div>
+
+            <div class="item" onClick={() => this.toggleHomeShortcuts()}>
+              <div class="name">
+                <span>首页书签</span>
+              </div>
+              <div class="value">
+                <span class={(isHomeShortcuts ? 'is-active ' : '') + 'switch'}>
+                  <span class="switch-value">
+                    {isHomeShortcuts ? '✔' : '×'}
+                  </span>
+                </span>
               </div>
             </div>
 
@@ -625,6 +664,33 @@ export default class Home extends Component {
           ) : (
             ''
           )}
+
+          {isHomeShortcuts ? (
+            <div class="shortcuts">
+              {shortcuts.map(s =>
+                s.url ? (
+                  <a class="shortcut" href={s.url}>
+                    {s.image ? (
+                      <span
+                        class="avatar"
+                        style={'background-image:url(' + s.image + ')'}
+                        data-loaded
+                      >
+                        {s.name[0]}
+                      </span>
+                    ) : (
+                      <span class="avatar is-text">{s.name[0]}</span>
+                    )}
+                    <span class="name">{s.name}</span>
+                  </a>
+                ) : (
+                  ''
+                )
+              )}
+            </div>
+          ) : (
+            ''
+          )}
         </main>
 
         <div class={(isEditorActive ? 'is-active ' : '') + 'modal editor'}>
@@ -658,9 +724,13 @@ export default class Home extends Component {
                 {searchIcon}
               </span>
 
-              <span class="icon" onClick={() => this.togglePanel('shortcut')}>
-                {shortcutIcon}
-              </span>
+              {isHomeShortcuts ? (
+                ''
+              ) : (
+                <span class="icon" onClick={() => this.togglePanel('shortcut')}>
+                  {shortcutIcon}
+                </span>
+              )}
 
               <span class="icon" onClick={() => this.togglePanel('setting')}>
                 {settingIcon}
