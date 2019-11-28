@@ -475,12 +475,19 @@ textarea {
   justify-content: center;
   align-items: center;
   background-color: #f1f3f5;
-  transition: all 1.5s cubic-bezier(0.55, 0, 0.1, 1);
+  // transition: all 1.5s cubic-bezier(0.55, 0, 0.1, 1);
 
   &.is-loaded {
-    opacity: 0;
-    z-index: -1;
-    pointer-events: none;
+    // opacity: 0;
+    // z-index: -1;
+    // pointer-events: none;
+
+    -webkit-mask: url(../static/nature-sprite.png);
+    mask: url(../static/nature-sprite.png);
+    -webkit-mask-size: 2300% 100%;
+    mask-size: 2300% 100%;
+    -webkit-animation: mask-play 1s steps(22) forwards;
+    animation: mask-play 1s steps(22) forwards;
   }
 }
 

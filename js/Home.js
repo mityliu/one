@@ -314,9 +314,11 @@ export default class Home extends Component {
     }
 
     $(() => {
-      this.setState({
-        isLoaded: true
-      });
+      setTimeout(() => {
+        this.setState({
+          isLoaded: true
+        });
+      }, 1000);
     });
   }
 
