@@ -3,6 +3,7 @@ import { useRef } from 'preact/hooks';
 import linkState from 'linkstate';
 import $ from 'cash-dom';
 import store2 from 'store2';
+import { Arr } from 'suni';
 import loadingSvg from '../static/one-loading.svg';
 
 const VERSION = 'v0.1.1128';
@@ -100,12 +101,14 @@ https://www.iqiyi.com`;
 
 const defaultHtmlTitle = '🐱 One';
 const defaultSearchHint = '搜索';
+const defaultBgUrls = 'https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg';
 
 const defaults = {
   searches: defaultSearches,
   links: defaultLinks,
   htmlTitle: defaultHtmlTitle,
   searchHint: defaultSearchHint,
+  bgUrls: defaultBgUrls,
   isYijuActive: true
 };
 
@@ -123,7 +126,7 @@ function getUrlName(url) {
     : url;
 }
 
-const defaultsKey = ['searches', 'links', 'htmlTitle', 'searchHint'];
+const defaultsKey = Object.keys(defaults);
 const hasSearchKeyRegex = /%s|\*\*/;
 
 export default class Home extends Component {
@@ -147,7 +150,9 @@ export default class Home extends Component {
     isFirstChecked: false,
     isReseted: false,
     isLoaded: false,
-    isYijuActive: defaults.isYijuActive
+    isYijuActive: defaults.isYijuActive,
+    bgUrls: '',
+    bgUrl: ''
   };
 
   closePanel = () => {
@@ -256,6 +261,8 @@ export default class Home extends Component {
     this.setState({
       isEditorActive: false
     });
+
+    this.syncStore();
   };
 
   openEditor = (key, title) => {
@@ -307,6 +314,21 @@ export default class Home extends Component {
       if (key === 'htmlTitle') {
         document.title = value;
       }
+
+      if (key === 'bgUrls' && !this.state.isLoaded) {
+        let urls = value.trim().split(/\s*\n+\s*/);
+        if (urls.length === 0) {
+          urls = defaultBgUrls.trim().split(/\s*\n+\s*/);
+        }
+
+        if (urls.length > 1) {
+          Arr.shuffle(urls);
+        }
+
+        this.setState({
+          bgUrl: urls[0]
+        });
+      }
     });
   };
 
@@ -355,9 +377,10 @@ export default class Home extends Component {
       isFirstChecked,
       isReseted,
       isLoaded,
-      isYijuActive
+      isYijuActive,
+      bgUrl
     } = state;
-
+    console.log('render');
     if (!isFirstChecked) {
       this.syncStore();
 
@@ -414,7 +437,10 @@ export default class Home extends Component {
 
     return (
       <div class="one">
-        <section class="page is-search has-mask">
+        <section
+          class="page is-search has-mask"
+          style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
+        >
           <div class="search-row">
             <div class="buttons">
               {SS.map(s =>
@@ -445,7 +471,10 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <section class="page is-shortcut has-mask">
+        <section
+          class="page is-shortcut has-mask"
+          style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
+        >
           <div class="shortcuts">
             {shortcuts.map(s =>
               s.url ? (
@@ -469,7 +498,10 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <section class="page is-setting has-mask">
+        <section
+          class="page is-setting has-mask"
+          style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
+        >
           <div class="panel">
             <div class="top-avatar">
               <img data-src="https://ae01.alicdn.com/kf/H28e6b174bc904fc0bfad14aba7380b5dk.png" />
@@ -523,6 +555,20 @@ export default class Home extends Component {
               </div>
             </div>
 
+            <div
+              class="item"
+              onClick={() =>
+                this.openEditor('bgUrls', '背景图（支持多个链接）')
+              }
+            >
+              <div class="name">
+                <span>背景图</span>
+              </div>
+              <div class="value">
+                <span>点击编辑</span>
+              </div>
+            </div>
+
             <div class="item" onClick={() => this.toggleYiju()}>
               <div class="name">
                 <span>今日诗词</span>
@@ -565,7 +611,10 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <main class="page is-home is-active">
+        <main
+          class="page is-home is-active"
+          style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
+        >
           {isYijuActive ? (
             <div class="yiju">
               <img
@@ -593,7 +642,7 @@ export default class Home extends Component {
               </div>
               <textarea
                 class="textarea"
-                placeholder="One"
+                placeholder={defaults[editorKey]}
                 ref={this.textarea}
                 value={editorValue}
                 onInput={e => this.editorInput(e, editorKey)}
