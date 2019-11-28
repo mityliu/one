@@ -277,7 +277,7 @@ textarea {
     bottom: 1em;
     z-index: 99;
     color: #1971c2;
-    transition: all 0.5s;
+    transition: all 0.25s;
 
     &.is-hide {
       opacity: 0;
@@ -335,8 +335,8 @@ textarea {
       mask: url(../static/nature-sprite.png);
       -webkit-mask-size: 2300% 100%;
       mask-size: 2300% 100%;
-      -webkit-animation: mask-play 0.8s steps(22) forwards;
-      animation: mask-play 0.8s steps(22) forwards;
+      -webkit-animation: mask-play 0.7s steps(22) forwards;
+      animation: mask-play 0.7s steps(22) forwards;
     }
 
     &.is-home {

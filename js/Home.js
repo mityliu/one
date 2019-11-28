@@ -186,10 +186,13 @@ export default class Home extends Component {
     $actionsNav.addClass('is-hide');
 
     setTimeout(function() {
+      $actionsNav.removeClass('is-hide');
+    }, 350);
+
+    setTimeout(function() {
       $currPage.removeClass('is-active hide');
       $nextPage.removeClass('is-half-active').addClass('is-active');
-      $actionsNav.removeClass('is-hide');
-    }, 1000);
+    }, 700);
 
     if (this.state.activePanel === 'home') {
       if (panelName === 'search') {
