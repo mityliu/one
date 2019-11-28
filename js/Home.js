@@ -3,6 +3,7 @@ import { useRef } from 'preact/hooks';
 import linkState from 'linkstate';
 import $ from 'cash-dom';
 import store2 from 'store2';
+import loadingSvg from '../static/one-loading.svg';
 
 const VERSION = 'v0.1.1128';
 const STORE_PREFIX = 'One';
@@ -142,7 +143,8 @@ export default class Home extends Component {
     editorTitle: '',
     editorKey: '',
     isFirstChecked: false,
-    isReseted: false
+    isReseted: false,
+    isLoaded: false
   };
 
   closePanel = () => {
@@ -310,6 +312,12 @@ export default class Home extends Component {
 
       $('body').addClass('is-app');
     }
+
+    $(() => {
+      this.setState({
+        isLoaded: true
+      });
+    });
   }
 
   render(_, state) {
@@ -324,7 +332,8 @@ export default class Home extends Component {
       editorTitle,
       editorKey,
       isFirstChecked,
-      isReseted
+      isReseted,
+      isLoaded
     } = state;
 
     if (!isFirstChecked) {
@@ -570,6 +579,10 @@ export default class Home extends Component {
             </span>
           )}
         </nav>
+
+        <div class={(isLoaded ? 'is-loaded ' : '') + 'loading'}>
+          <img src={loadingSvg} />
+        </div>
       </div>
     );
   }
