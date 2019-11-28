@@ -380,8 +380,9 @@ textarea {
       }
 
       .value {
-        text-align: right;
         color: #868e96;
+        display: flex;
+        justify-content: flex-end;
       }
 
       & + .item {
@@ -486,8 +487,53 @@ textarea {
     mask: url(../static/nature-sprite.png);
     -webkit-mask-size: 2300% 100%;
     mask-size: 2300% 100%;
-    -webkit-animation: mask-play 1s steps(22) forwards;
-    animation: mask-play 1s steps(22) forwards;
+    -webkit-animation: mask-play 0.75s steps(22) forwards;
+    animation: mask-play 0.75s steps(22) forwards;
+  }
+}
+
+.yiju {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+}
+
+.switch {
+  width: 3em;
+  height: 1.25em;
+  background-color: #ff6b6b;
+  border-radius: 30px;
+  cursor: pointer;
+  position: relative;
+  display: block;
+  color: #f1f3f5;
+
+  &-value {
+    height: 1.25em;
+    width: 1.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    box-sizing: border-box;
+    border: 5px #e03131 solid;
+    background-color: #e03131;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: margin-left 0.3s ease, width 0.3s ease,
+      background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  &.is-active {
+    background-color: #51cf66;
+
+    .switch-value {
+      margin-left: 2em;
+      background-color: #0ca678;
+      border-color: #0ca678;
+    }
   }
 }
 

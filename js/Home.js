@@ -105,7 +105,8 @@ const defaults = {
   searches: defaultSearches,
   links: defaultLinks,
   htmlTitle: defaultHtmlTitle,
-  searchHint: defaultSearchHint
+  searchHint: defaultSearchHint,
+  isYijuActive: true
 };
 
 let tmpTaker;
@@ -144,7 +145,8 @@ export default class Home extends Component {
     editorKey: '',
     isFirstChecked: false,
     isReseted: false,
-    isLoaded: false
+    isLoaded: false,
+    isYijuActive: defaults.isYijuActive
   };
 
   closePanel = () => {
@@ -298,6 +300,12 @@ export default class Home extends Component {
     });
   };
 
+  toggleYiju = () => {
+    this.setState({
+      isYijuActive: !this.state.isYijuActive
+    });
+  };
+
   componentDidMount() {
     // TODO default bg -> lazy load new bg
     console.log('One page loaded  (o˘◡˘o)');
@@ -318,7 +326,7 @@ export default class Home extends Component {
         this.setState({
           isLoaded: true
         });
-      }, 1000);
+      }, 750);
     });
   }
 
@@ -335,7 +343,8 @@ export default class Home extends Component {
       editorKey,
       isFirstChecked,
       isReseted,
-      isLoaded
+      isLoaded,
+      isYijuActive
     } = state;
 
     if (!isFirstChecked) {
@@ -503,6 +512,17 @@ export default class Home extends Component {
               </div>
             </div>
 
+            <div class="item" onClick={() => this.toggleYiju()}>
+              <div class="name">
+                <span>今日诗词</span>
+              </div>
+              <div class="value">
+                <span class={(isYijuActive ? 'is-active ' : '') + 'switch'}>
+                  <span class="switch-value">{isYijuActive ? '✔' : '×'}</span>
+                </span>
+              </div>
+            </div>
+
             <div class="item">
               <button
                 class="button is-danger is-light is-fullwidth long-press is-reset"
@@ -534,7 +554,18 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <main class="page is-home is-active"></main>
+        <main class="page is-home is-active">
+          {isYijuActive ? (
+            <div class="yiju">
+              <img
+                alt="今日诗词"
+                src="https://v2.jinrishici.com/one.svg?font-size=18&color=whitesmoke"
+              />
+            </div>
+          ) : (
+            ''
+          )}
+        </main>
 
         <div class={(isEditorActive ? 'is-active ' : '') + 'modal editor'}>
           <div
