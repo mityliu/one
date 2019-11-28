@@ -122,6 +122,115 @@ textarea {
   }
 }
 
+.button {
+  background-color: #fff;
+  border-color: #dbdbdb;
+  border-width: 1px;
+  color: #363636;
+  cursor: pointer;
+  justify-content: center;
+  padding-bottom: calc(0.5em - 1px);
+  padding-left: 1em;
+  padding-right: 1em;
+  padding-top: calc(0.5em - 1px);
+  text-align: center;
+  white-space: nowrap;
+
+  &[disabled] {
+    opacity: 0.5;
+    box-shadow: none;
+  }
+
+  &:active,
+  &:focus {
+    outline: 0;
+  }
+
+  &.is-fullwidth {
+    display: flex;
+    width: 100%;
+  }
+
+  &.is-light {
+    background-color: #f5f5f5;
+    border-color: transparent;
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  &.is-info {
+    background-color: #3298dc;
+    border-color: transparent;
+    color: #fff;
+  }
+
+  &.is-info.is-light {
+    background-color: #eef6fc;
+    color: #1d72aa;
+
+    &:hover {
+      background-color: #e3f1fa;
+      border-color: transparent;
+      color: #1d72aa;
+    }
+
+    &:active {
+      background-color: #d8ebf8;
+      border-color: transparent;
+      color: #1d72aa;
+    }
+  }
+
+  &.is-danger {
+    background-color: #f14668;
+    border-color: transparent;
+    color: #fff;
+
+    &.is-light {
+      background-color: #feecf0;
+      color: #cc0f35;
+
+      &:hover {
+        background-color: #fde0e6;
+        border-color: transparent;
+        color: #cc0f35;
+      }
+
+      &:active {
+        background-color: #fcd4dc;
+        border-color: transparent;
+        color: #cc0f35;
+      }
+    }
+  }
+}
+
+.long-press {
+  position: relative;
+  .text {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
+  }
+  .state {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #ff8787;
+    transform: scale(0, 1);
+    transform-origin: left;
+  }
+
+  &:active {
+    .state {
+      transform: scale(1);
+      transition: all 2s cubic-bezier(0.55, 0, 0.1, 1);
+    }
+  }
+}
+
 .editor {
   .box {
     border-radius: 0;
@@ -168,6 +277,11 @@ textarea {
     bottom: 1em;
     z-index: 99;
     color: #1971c2;
+    transition: all 0.5s;
+
+    &.is-hide {
+      opacity: 0;
+    }
 
     .actions {
       padding-right: 1em;
@@ -329,6 +443,7 @@ textarea {
       align-items: center;
       background: #eee;
       color: green;
+      font-weight: bold;
     }
   }
 }
@@ -383,6 +498,10 @@ textarea {
       border-color: transparent;
       background-color: #effaf3;
       color: #257942;
+
+      &:empty {
+        display: none;
+      }
 
       & + button {
         border-left: 1px solid rgba(37, 121, 66, 0.15) !important;

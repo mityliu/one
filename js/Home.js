@@ -2,6 +2,12 @@ import { h, Component } from 'preact';
 import { useRef } from 'preact/hooks';
 import linkState from 'linkstate';
 import $ from 'cash-dom';
+import store2 from 'store2';
+
+const VERSION = 'v0.1.1128';
+const STORE_PREFIX = 'One';
+
+const store = store2.namespace(STORE_PREFIX);
 
 const searchIcon = (
   <svg
@@ -91,15 +97,31 @@ https://www.douban.com/favicon.ico
 
 https://www.iqiyi.com`;
 
+const defaultHtmlTitle = '🐱 One';
+const defaultSearchHint = '搜索';
+
+const defaults = {
+  searches: defaultSearches,
+  links: defaultLinks,
+  htmlTitle: defaultHtmlTitle,
+  searchHint: defaultSearchHint
+};
+
+let tmpTaker;
+
 function getUrlName(url) {
-  return url
-    .match(/\/\/([^\/]+)\/?/)[1]
-    .split('.')
-    .slice(-2, -1)[0]
-    .replace(/^(\w)/, function(v) {
-      return v.toUpperCase();
-    });
+  const matches = url.match(/\/\/([^\/]+)\/?/);
+  return matches
+    ? matches[1]
+        .split('.')
+        .slice(-2, -1)[0]
+        .replace(/^(\w)/, function(v) {
+          return v.toUpperCase();
+        })
+    : url;
 }
+
+const defaultsKey = ['searches', 'links', 'htmlTitle', 'searchHint'];
 
 export default class Home extends Component {
   input = useRef(null);
@@ -111,13 +133,15 @@ export default class Home extends Component {
     appBarColor: '#e3e3e3',
     panelColor: '#9e9e9e',
     isApp: false,
-    searches: defaultSearches,
-    links: defaultLinks,
-    htmlTitle: '🐱 One',
-    searchHint: '搜索',
+    searches: '',
+    links: '',
+    htmlTitle: '',
+    searchHint: '',
     isEditorActive: false,
     editorTitle: '',
-    editorKey: ''
+    editorKey: '',
+    isFirstChecked: false,
+    isReseted: false
   };
 
   closePanel = () => {
@@ -154,12 +178,16 @@ export default class Home extends Component {
     const $currPage = $('.page.is-active');
     const $nextPage = $('.page.is-' + (panelName || 'home'));
 
+    const $actionsNav = $('.actions-nav');
+
     $currPage.addClass('hide');
     $nextPage.addClass('is-half-active');
+    $actionsNav.addClass('is-hide');
 
     setTimeout(function() {
       $currPage.removeClass('is-active hide');
       $nextPage.removeClass('is-half-active').addClass('is-active');
+      $actionsNav.removeClass('is-hide');
     }, 1000);
 
     if (this.state.activePanel === 'home') {
@@ -202,12 +230,56 @@ export default class Home extends Component {
     this.setState({
       isEditorActive: true,
       editorKey: key,
-      editorTitle: title
+      editorTitle: title,
+      isReseted: false
     });
+
+    $('.long-press.is-reset')
+      .removeClass('is-info')
+      .addClass('is-danger')
+      .removeAttr('disabled');
 
     setTimeout(() => {
       this.textarea.current.focus();
     }, 500);
+  };
+
+  editorInput = (e, key) => {
+    const value = e.target.value;
+
+    this.setState({ [key]: value });
+
+    store(key, value);
+  };
+
+  tickResetConfirm = e => {
+    tmpTaker = setTimeout(() => {
+      store.clearAll();
+      this.syncStore();
+
+      $(e.target)
+        .removeClass('is-danger')
+        .addClass('is-info')
+        .attr('disabled', '');
+
+      this.setState({
+        isReseted: true
+      });
+    }, 1900);
+  };
+
+  syncStore = () => {
+    defaultsKey.forEach(key => {
+      const value = store(key) || defaults[key];
+
+      this.setState({
+        [key]: value
+      });
+
+      if (key === 'htmlTitle') {
+        document.title = value;
+      }
+    });
   };
 
   componentDidMount() {
@@ -236,8 +308,18 @@ export default class Home extends Component {
       searchHint,
       isEditorActive,
       editorTitle,
-      editorKey
+      editorKey,
+      isFirstChecked,
+      isReseted
     } = state;
+
+    if (!isFirstChecked) {
+      this.syncStore();
+
+      this.setState({
+        isFirstChecked: true
+      });
+    }
 
     const editorValue = state[editorKey];
 
@@ -287,20 +369,22 @@ export default class Home extends Component {
 
     return (
       <div class="one">
-        <main class="page is-home is-active"></main>
-
         <section class="page is-search has-mask">
           <div class="search-row">
             <div class="buttons">
-              {SS.map(s => (
-                <button
-                  onClick={() => this.searchGo(s)}
-                  class="button is-info is-outlined"
-                  disabled={!q}
-                >
-                  {s.name}
-                </button>
-              ))}
+              {SS.map(s =>
+                s ? (
+                  <button
+                    onClick={() => this.searchGo(s)}
+                    class="button is-info is-outlined"
+                    disabled={!q}
+                  >
+                    {s.name}
+                  </button>
+                ) : (
+                  ''
+                )
+              )}
             </div>
 
             <div class="field">
@@ -318,19 +402,23 @@ export default class Home extends Component {
 
         <section class="page is-shortcut has-mask">
           <div class="shortcuts">
-            {shortcuts.map(s => (
-              <a class="shortcut" href={s.url}>
-                {s.image ? (
-                  <span
-                    class="avatar"
-                    style={'background-image:url(' + s.image + ')'}
-                  ></span>
-                ) : (
-                  <span class="avatar is-text">{s.name[0]}</span>
-                )}
-                <span class="name">{s.name}</span>
-              </a>
-            ))}
+            {shortcuts.map(s =>
+              s.url ? (
+                <a class="shortcut" href={s.url}>
+                  {s.image ? (
+                    <span
+                      class="avatar"
+                      style={'background-image:url(' + s.image + ')'}
+                    ></span>
+                  ) : (
+                    <span class="avatar is-text">{s.name[0]}</span>
+                  )}
+                  <span class="name">{s.name}</span>
+                </a>
+              ) : (
+                ''
+              )
+            )}
           </div>
         </section>
 
@@ -339,6 +427,7 @@ export default class Home extends Component {
             <div class="top-avatar">
               <img data-src="https://ae01.alicdn.com/kf/H28e6b174bc904fc0bfad14aba7380b5dk.png" />
             </div>
+
             <div
               class="item"
               onClick={() => this.openEditor('htmlTitle', '标题')}
@@ -350,6 +439,7 @@ export default class Home extends Component {
                 <span>{htmlTitle}</span>
               </div>
             </div>
+
             <div
               class="item"
               onClick={() => this.openEditor('searchHint', '搜索提示语')}
@@ -361,6 +451,7 @@ export default class Home extends Component {
                 <span>{searchHint}</span>
               </div>
             </div>
+
             <div
               class="item"
               onClick={() => this.openEditor('searches', '搜索引擎')}
@@ -372,6 +463,7 @@ export default class Home extends Component {
                 <span>点击编辑</span>
               </div>
             </div>
+
             <div
               class="item"
               onClick={() => this.openEditor('links', '书签链接')}
@@ -383,13 +475,39 @@ export default class Home extends Component {
                 <span>点击编辑</span>
               </div>
             </div>
+
+            <div class="item">
+              <button
+                class="button is-danger is-light is-fullwidth long-press is-reset"
+                onMouseUp={() => {
+                  clearTimeout(tmpTaker);
+                }}
+                onMouseDown={e => this.tickResetConfirm(e)}
+                onTouchEnd={() => {
+                  clearTimeout(tmpTaker);
+                }}
+                onTouchStart={e => this.tickResetConfirm(e)}
+              >
+                <span class="state"></span>
+                {isReseted ? (
+                  <span class="text success">重置成功 ✔</span>
+                ) : (
+                  <span class="text">长按 恢复默认</span>
+                )}
+              </button>
+            </div>
+
             <div class="item">
               <div class="copyright">
-                One<span>-</span>v0.1.1127<span>-</span>(o˘◡˘o)
+                One<span>-</span>
+                {VERSION}
+                <span>-</span>(o˘◡˘o)
               </div>
             </div>
           </div>
         </section>
+
+        <main class="page is-home is-active"></main>
 
         <div class={(isEditorActive ? 'is-active ' : '') + 'modal editor'}>
           <div
@@ -409,7 +527,7 @@ export default class Home extends Component {
                 placeholder="One"
                 ref={this.textarea}
                 value={editorValue}
-                onInput={linkState(this, editorKey)}
+                onInput={e => this.editorInput(e, editorKey)}
               ></textarea>
             </div>
           </div>
