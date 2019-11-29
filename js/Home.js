@@ -5,128 +5,10 @@ import $ from 'cash-dom';
 import store2 from 'store2';
 import { Arr } from 'suni';
 import loadingSvg from '../static/one-loading.svg';
-
-const VERSION = 'v0.1.1128';
-const STORE_PREFIX = 'One';
+import { searchIcon, shortcutIcon, settingIcon, closeIcon } from './svgIcons';
+import { VERSION, STORE_PREFIX, defaults, defaultsKey } from './config';
 
 const store = store2.namespace(STORE_PREFIX);
-
-const searchIcon = (
-  <svg
-    viewBox="0 0 32 32"
-    width="32"
-    height="32"
-    fill="none"
-    stroke="currentcolor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="3"
-    class="icon-svg"
-  >
-    <circle cx="14" cy="14" r="12"></circle>
-    <path d="M23 23 L30 30"></path>
-  </svg>
-);
-
-const shortcutIcon = (
-  <svg
-    viewBox="0 0 32 32"
-    width="32"
-    height="32"
-    fill="none"
-    stroke="currentcolor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="3"
-    class="icon-svg"
-  >
-    <circle cx="24" cy="8" r="2"></circle>
-    <path data-v-3480f8cd="" d="M2 18 L18 2 30 2 30 14 14 30 Z"></path>
-  </svg>
-);
-
-const settingIcon = (
-  <svg
-    viewBox="0 0 32 32"
-    width="32"
-    height="32"
-    fill="none"
-    stroke="currentcolor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="2"
-    class="icon-svg"
-  >
-    <path
-      data-v-3480f8cd=""
-      d="M13 2 L13 6 11 7 8 4 4 8 7 11 6 13 2 13 2 19 6 19 7 21 4 24 8 28 11 25 13 26 13 30 19 30 19 26 21 25 24 28 28 24 25 21 26 19 30 19 30 13 26 13 25 11 28 8 24 4 21 7 19 6 19 2 Z"
-    ></path>
-    <circle cx="16" cy="16" r="4"></circle>
-  </svg>
-);
-
-const closeIcon = (
-  <svg
-    viewBox="0 0 32 32"
-    width="24"
-    height="24"
-    fill="none"
-    stroke="currentcolor"
-    stroke-linecap="round"
-    stroke-linejoin="round"
-    stroke-width="3"
-    class="icon-svg"
-  >
-    <path d="M2 30 L30 2 M30 30 L2 2"></path>
-  </svg>
-);
-
-const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
-https://magi.com/search?q=
-https://www.google.com/search?q=`;
-
-const defaultLinks = `知乎
-https://www.zhihu.com
-https://www.zhihu.com/favicon.ico
-
-哔哩
-https://m.bilibili.com
-https://www.bilibili.com/favicon.ico
-
-豆瓣
-https://m.douban.com
-https://www.douban.com/favicon.ico
-
-腾讯
-https://m.v.qq.com
-http://v.qq.com/favicon.ico
-
-https://www.iqiyi.com
-
-https://www.youku.com
-
-https://www.nfmovies.com
-
-https://www.duboku.net
-
-https://1090ys.com
-
-云播
-https://m.yunbtv.com`;
-
-const defaultHtmlTitle = '🐱 One';
-const defaultSearchHint = '搜索';
-const defaultBgUrls = 'https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg';
-
-const defaults = {
-  searches: defaultSearches,
-  links: defaultLinks,
-  htmlTitle: defaultHtmlTitle,
-  searchHint: defaultSearchHint,
-  bgUrls: defaultBgUrls,
-  isYijuActive: false,
-  isHomeShortcuts: true
-};
 
 let tmpTaker;
 
@@ -142,7 +24,45 @@ function getUrlName(url) {
     : url;
 }
 
-const defaultsKey = Object.keys(defaults);
+function parseSearches(searches) {
+  return searches
+    .trim()
+    .split(/\n+/)
+    .map(s => {
+      const ls = s.trim().split(/\s+/);
+      const name = ls.length > 1 ? ls[0] : getUrlName(s);
+
+      return {
+        name,
+        url: ls.pop()
+      };
+    });
+}
+
+function parseShortcuts(links) {
+  return links.split(/\n{2,}/).map(link => {
+    const data = {};
+    link
+      .trim()
+      .split(/\n/)
+      .forEach(l => {
+        if (/\.(ico|png|jpe?g|gif)/.test(l)) {
+          data.image = l;
+        } else if (/\/\/|\.\w+\./.test(l)) {
+          data.url = l;
+        } else {
+          data.name = l;
+        }
+      });
+
+    if (data.url && !data.name) {
+      data.name = getUrlName(data.url);
+    }
+
+    return data;
+  });
+}
+
 const hasSearchKeyRegex = /%s|\*\*/;
 
 export default class Home extends Component {
@@ -340,7 +260,7 @@ export default class Home extends Component {
       if (key === 'bgUrls' && !this.state.isLoaded) {
         let urls = value.trim().split(/\s*\n+\s*/);
         if (urls.length === 0) {
-          urls = defaultBgUrls.trim().split(/\s*\n+\s*/);
+          urls = defaults.bgUrls.trim().split(/\s*\n+\s*/);
         }
 
         if (urls.length > 1) {
@@ -395,7 +315,7 @@ export default class Home extends Component {
         this.setState({
           isLoaded: true
         });
-      }, 750);
+      }, 500);
     });
   }
 
@@ -432,40 +352,9 @@ export default class Home extends Component {
       document.title = editorValue;
     }
 
-    const SS = searches
-      .trim()
-      .split(/\n+/)
-      .map(s => {
-        const ls = s.trim().split(/\s+/);
-        const name = ls.length > 1 ? ls[0] : getUrlName(s);
+    const SS = parseSearches(searches);
 
-        return {
-          name,
-          url: ls.pop()
-        };
-      });
-
-    const shortcuts = links.split(/\n{2,}/).map(link => {
-      const data = {};
-      link
-        .trim()
-        .split(/\n/)
-        .forEach(l => {
-          if (/\.(ico|png|jpe?g|gif)/.test(l)) {
-            data.image = l;
-          } else if (/\/\/|\.\w+\./.test(l)) {
-            data.url = l;
-          } else {
-            data.name = l;
-          }
-        });
-
-      if (data.url && !data.name) {
-        data.name = getUrlName(data.url);
-      }
-
-      return data;
-    });
+    const shortcuts = parseShortcuts(links);
 
     const isHomePanelActive = activePanel === 'home';
     // const isSearchPanelActive = activePanel === 'search';
