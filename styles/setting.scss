@@ -1,0 +1,54 @@
+.panel {
+  background-color: #f8f9fa;
+  padding: 0.5em 1.5em 0;
+  width: 100%;
+  z-index: 2;
+  position: relative;
+
+  .top-avatar {
+    position: absolute;
+    top: -5.5em;
+    right: 0.5em;
+    pointer-events: none;
+
+    img {
+      max-width: 200px;
+      animation: 8s linear 0s infinite normal forwards running breath;
+    }
+  }
+
+  .item {
+    display: flex;
+    padding: 1em 0;
+
+    .name,
+    .value {
+      flex: 1;
+    }
+
+    .name {
+      color: #343a40;
+      font-weight: bold;
+    }
+
+    .value {
+      color: #868e96;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    & + .item {
+      border-top: 1px solid #dee2e6;
+    }
+  }
+
+  .copyright {
+    width: 100%;
+    text-align: center;
+    color: #ced4da;
+
+    span {
+      margin: 0 0.5em;
+    }
+  }
+}

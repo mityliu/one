@@ -1,0 +1,35 @@
+body {
+  font-size: 16px;
+
+  // tmp
+  &.is-app {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+body,
+button,
+input,
+select,
+textarea {
+  font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', Helvetica,
+    Arial, sans-serif;
+}
+
+/* clears the 'X' from Internet Explorer */
+input.hide-clear[type='search']::-ms-clear,
+input.hide-clear[type='search']::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the 'X' from Chrome */
+input.hide-clear[type='search']::-webkit-search-decoration,
+input.hide-clear[type='search']::-webkit-search-cancel-button,
+input.hide-clear[type='search']::-webkit-search-results-button,
+input.hide-clear[type='search']::-webkit-search-results-decoration {
+  display: none;
+}

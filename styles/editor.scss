@@ -1,0 +1,33 @@
+.editor {
+  .box {
+    border-radius: 0;
+    padding: 0.75rem 1.25rem;
+  }
+
+  .textarea {
+    padding: calc(0.75em - 1px);
+    width: calc(100% - 1.5em);
+    min-width: auto;
+    font-size: 1.2em;
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: scroll;
+  }
+
+  &-title {
+    padding: 0 0.5em 0.5em;
+    text-align: center;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 1em;
+    position: relative;
+    color: #868e96;
+
+    .is-close {
+      position: absolute;
+      right: 0;
+      width: 1rem;
+      height: 1rem;
+      opacity: 0.5;
+    }
+  }
+}
