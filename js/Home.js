@@ -124,7 +124,7 @@ const defaults = {
   htmlTitle: defaultHtmlTitle,
   searchHint: defaultSearchHint,
   bgUrls: defaultBgUrls,
-  isYijuActive: true,
+  isYijuActive: false,
   isHomeShortcuts: true
 };
 
@@ -220,12 +220,12 @@ export default class Home extends Component {
 
     setTimeout(function() {
       $actionsNav.removeClass('is-hide');
-    }, 350);
+    }, 250);
 
     setTimeout(function() {
       $currPage.removeClass('is-active hide');
       $nextPage.removeClass('is-half-active').addClass('is-active');
-    }, 700);
+    }, 350);
 
     if (this.state.activePanel === 'home') {
       if (panelName === 'search') {

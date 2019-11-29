@@ -1,3 +1,5 @@
+$mask-play-timing: 0.35s;
+
 .page {
   width: 100%;
   min-height: 100%;
@@ -24,8 +26,8 @@
     mask: url(../static/nature-sprite.png);
     -webkit-mask-size: 2300% 100%;
     mask-size: 2300% 100%;
-    -webkit-animation: mask-play 0.7s steps(22) forwards;
-    animation: mask-play 0.7s steps(22) forwards;
+    -webkit-animation: mask-play $mask-play-timing steps(22) forwards;
+    animation: mask-play $mask-play-timing steps(22) forwards;
   }
 
   &.is-home {
