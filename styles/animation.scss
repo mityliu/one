@@ -22,3 +22,17 @@
     mask-position: 100% 0;
   }
 }
+
+@keyframes float-ttb-in {
+  0% {
+    animation-timing-function: cubic-bezier(0.2242, 0.7499, 0.3142, 0.8148);
+    transform: translate(0px, -14.925px) rotate(0deg) scale(1, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 0.05;
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 1;
+  }
+}

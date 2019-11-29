@@ -417,7 +417,7 @@ export default class Home extends Component {
     // const isSettingPanelActive = activePanel === 'setting';
 
     return (
-      <div class="one">
+      <div class={(isLoaded ? 'is-loaded ' : '') + 'one'}>
         <section
           class="page is-search has-mask"
           style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}

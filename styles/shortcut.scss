@@ -65,3 +65,28 @@
     }
   }
 }
+
+.page.is-active {
+  .shortcut {
+    .avatar,
+    .name {
+      @extend .float-ttb-in;
+    }
+  }
+}
+
+.page:not(.is-active) {
+  .shortcut {
+    .avatar,
+    .name {
+      transform: matrix(1, 0, 0, 1, 0, -14.925);
+      opacity: 0.1;
+    }
+  }
+}
+
+.float-ttb-in {
+  transform: matrix(1, 0, 0, 1, 0, -14.925);
+  opacity: 0.05;
+  animation: 0.8s linear 0s 1 normal forwards running float-ttb-in;
+}
