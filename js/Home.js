@@ -39,17 +39,23 @@ function parseSearches(searches) {
     });
 }
 
+const isImageRegex = /\.(ico|png|jpe?g|gif)/;
+const isUrlRegex = /\/\/|\.\w+\./;
+const isColorRegex = /^(#\w+|rgb\()/;
+
 function parseShortcuts(links) {
   return links.split(/\n{2,}/).map(link => {
     const data = {};
     link
       .trim()
-      .split(/\n/)
+      .split(/\s*\n\s*/)
       .forEach(l => {
-        if (/\.(ico|png|jpe?g|gif)/.test(l)) {
+        if (isImageRegex.test(l)) {
           data.image = l;
-        } else if (/\/\/|\.\w+\./.test(l)) {
+        } else if (isUrlRegex.test(l)) {
           data.url = l;
+        } else if (isColorRegex.test(l)) {
+          data.color = l.split(/\s+/).filter(v => isColorRegex.test(v));
         } else {
           data.name = l;
         }
@@ -62,6 +68,50 @@ function parseShortcuts(links) {
     return data;
   });
 }
+
+const getShortcutStyle = function(s) {
+  let style = '';
+
+  // if (s.image) {
+  //   style += 'background-image:url(' + s.image + ');';
+  // }
+
+  if (s.color) {
+    style += 'background-color:' + s.color[0] + ';';
+
+    if (s.color[1]) {
+      style += 'color:' + s.color[1] + ';';
+    }
+  }
+
+  return style;
+};
+
+const renderShortcuts = (shortcuts, isLazy = false) =>
+  shortcuts.map(s =>
+    s.url ? (
+      <a class="shortcut" href={s.url}>
+        {s.image ? (
+          isLazy ? (
+            <span class="avatar" style={getShortcutStyle(s)}>
+              <img data-src={s.image} />
+            </span>
+          ) : (
+            <span class="avatar" style={getShortcutStyle(s)}>
+              <img src={s.image} data-loaded />
+            </span>
+          )
+        ) : (
+          <span class="avatar is-text" style={getShortcutStyle(s)}>
+            <span>{s.name[0]}</span>
+          </span>
+        )}
+        <span class="name">{s.name}</span>
+      </a>
+    ) : (
+      ''
+    )
+  );
 
 const hasSearchKeyRegex = /%s|\*\*/;
 
@@ -107,11 +157,7 @@ export default class Home extends Component {
     this.setState({
       activePanel: panelName
     });
-    this.setAppBarColor(
-      this.state.isYijuActive
-        ? this.state.yijuPanelColor
-        : this.state.panelColor
-    );
+    this.setAppBarColorInPanel();
   };
 
   openSearchPanel = () => {
@@ -153,12 +199,12 @@ export default class Home extends Component {
       } else if (panelName === 'shortcut') {
         this.openShortcutPanel();
 
-        $('.is-shortcut .shortcuts .avatar[data-style]').each(function(i, el) {
+        $('.is-shortcut .avatar img[data-src]').each(function(i, el) {
           $(el)
-            .attr('style', $(el).attr('data-style'))
+            .attr('src', $(el).attr('data-src'))
             .removeClass('is-text')
             .attr('data-loaded', '')
-            .removeAttr('data-style');
+            .removeAttr('data-src');
         });
       } else if (panelName === 'setting') {
         this.openSettingPanel();
@@ -274,13 +320,21 @@ export default class Home extends Component {
     });
   };
 
+  setAppBarColorInPanel = () => {
+    this.setAppBarColor(
+      this.state.isYijuActive
+        ? this.state.yijuPanelColor
+        : this.state.panelColor
+    );
+  };
+
   toggleYiju = () => {
     const isYijuActive = !this.state.isYijuActive;
 
     this.setState({
       isYijuActive
     });
-    this.setAppBarColor();
+    this.setAppBarColorInPanel();
 
     store('isYijuActive', isYijuActive);
   };
@@ -291,7 +345,7 @@ export default class Home extends Component {
     this.setState({
       isHomeShortcuts
     });
-    this.setAppBarColor();
+    this.setAppBarColorInPanel();
 
     store('isHomeShortcuts', isHomeShortcuts);
   };
@@ -315,6 +369,7 @@ export default class Home extends Component {
         this.setState({
           isLoaded: true
         });
+        // TODO isHomeShortcuts
       }, 500);
     });
   }
@@ -401,27 +456,7 @@ export default class Home extends Component {
           class="page is-shortcut has-mask"
           style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
         >
-          <div class="shortcuts">
-            {shortcuts.map(s =>
-              s.url ? (
-                <a class="shortcut" href={s.url}>
-                  {s.image ? (
-                    <span
-                      class="avatar"
-                      data-style={'background-image:url(' + s.image + ')'}
-                    >
-                      {s.name[0]}
-                    </span>
-                  ) : (
-                    <span class="avatar is-text">{s.name[0]}</span>
-                  )}
-                  <span class="name">{s.name}</span>
-                </a>
-              ) : (
-                ''
-              )
-            )}
-          </div>
+          <div class="shortcuts">{renderShortcuts(shortcuts, true)}</div>
         </section>
 
         <section
@@ -566,28 +601,7 @@ export default class Home extends Component {
           )}
 
           {isHomeShortcuts ? (
-            <div class="shortcuts">
-              {shortcuts.map(s =>
-                s.url ? (
-                  <a class="shortcut" href={s.url}>
-                    {s.image ? (
-                      <span
-                        class="avatar"
-                        style={'background-image:url(' + s.image + ')'}
-                        data-loaded
-                      >
-                        {s.name[0]}
-                      </span>
-                    ) : (
-                      <span class="avatar is-text">{s.name[0]}</span>
-                    )}
-                    <span class="name">{s.name}</span>
-                  </a>
-                ) : (
-                  ''
-                )
-              )}
-            </div>
+            <div class="shortcuts">{renderShortcuts(shortcuts, false)}</div>
           ) : (
             ''
           )}
