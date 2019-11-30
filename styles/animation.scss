@@ -1,14 +1,14 @@
 @keyframes breath {
   0% {
     animation-timing-function: cubic-bezier(0.9647, 0.2413, -0.0705, 0.7911);
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
   51% {
     animation-timing-function: cubic-bezier(0.9226, 0.2631, -0.0308, 0.7628);
     transform: scale(1.02);
   }
   100% {
-    transform: scale(0.95);
+    transform: scale(0.98);
   }
 }
 

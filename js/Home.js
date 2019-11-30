@@ -72,10 +72,6 @@ function parseShortcuts(links) {
 const getShortcutStyle = function(s) {
   let style = '';
 
-  // if (s.image) {
-  //   style += 'background-image:url(' + s.image + ');';
-  // }
-
   if (s.color) {
     style += 'background-color:' + s.color[0] + ';';
 
@@ -619,6 +615,13 @@ export default class Home extends Component {
                 <span class="icon is-close" onClick={() => this.closeEditor()}>
                   {closeIcon}
                 </span>
+              </div>
+              <div class="editor-hint">
+                <p>清空内容会恢复成默认值。</p>
+                <p>
+                  图床：<a href="http://aote.frqrjg.top/Ali">奥特曼</a> |{' '}
+                  <a href="https://photo.benzhu.xyz/Ali">笨猪</a>
+                </p>
               </div>
               <textarea
                 class="textarea"
