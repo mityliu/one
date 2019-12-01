@@ -3,6 +3,7 @@
   bottom: 0;
   width: 100%;
   background-color: $oc-gray-0;
+  display: none;
 
   .field {
     border-top: 1px solid $oc-gray-3;
@@ -40,5 +41,11 @@
         border-left: 1px solid rgba(37, 121, 66, 0.15) !important;
       }
     }
+  }
+}
+
+.is-search.is-active {
+  .search-row {
+    display: block;
   }
 }

@@ -176,7 +176,7 @@ export default class Home extends Component {
 
     const $actionsNav = $('.actions-nav');
 
-    $currPage.addClass('hide');
+    $currPage.addClass('is-hide');
     $nextPage.addClass('is-half-active');
     $actionsNav.addClass('is-hide');
 
@@ -185,7 +185,7 @@ export default class Home extends Component {
     }, 250);
 
     setTimeout(function() {
-      $currPage.removeClass('is-active hide');
+      $currPage.removeClass('is-active is-hide');
       $nextPage.removeClass('is-half-active').addClass('is-active');
     }, 350);
 
@@ -636,7 +636,7 @@ export default class Home extends Component {
           </div>
         </div>
 
-        <nav class={(isEditorActive ? 'hide ' : '') + 'actions-nav'}>
+        <nav class={(isEditorActive ? 'is-hide ' : '') + 'actions-nav'}>
           {isHomePanelActive ? (
             <div class="actions">
               <span

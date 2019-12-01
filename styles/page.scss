@@ -12,16 +12,19 @@ $mask-play-timing: 0.35s;
   background-size: cover;
   background-position: center;
   background-color: $oc-gray-1;
+  visibility: hidden;
 
   &.is-half-active {
     z-index: 20;
+    visibility: visible;
   }
 
   &.is-active {
     z-index: 30;
+    visibility: visible;
   }
 
-  &.hide {
+  &.is-hide {
     -webkit-mask: url(../static/nature-sprite.png);
     mask: url(../static/nature-sprite.png);
     -webkit-mask-size: 2300% 100%;
