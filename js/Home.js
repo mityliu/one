@@ -671,9 +671,9 @@ export default class Home extends Component {
           )}
         </nav>
 
-        {/* <div class={(isLoaded ? 'is-loaded ' : '') + 'loading'}>
+        <div class={(isLoaded ? 'is-loaded ' : '') + 'loading'}>
           <img src={loadingSvg} />
-        </div> */}
+        </div>
       </div>
     );
   }
