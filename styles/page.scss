@@ -13,6 +13,8 @@ $mask-play-timing: 0.35s;
   background-position: center;
   background-color: $oc-gray-1;
   visibility: hidden;
+  margin: 0;
+  padding: 0;
 
   &.is-half-active {
     z-index: 20;
