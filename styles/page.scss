@@ -11,7 +11,7 @@ $mask-play-timing: 0.35s;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: #f1f3f5;
+  background-color: $oc-gray-1;
 
   &.is-half-active {
     z-index: 20;

@@ -1,14 +1,15 @@
 .panel {
-  background-color: #f8f9fa;
+  background-color: $oc-gray-0;
   padding: 0.5em 1.5em 0;
   width: 100%;
   z-index: 2;
   position: relative;
+  font-size: 0.85rem;
 
   .top-avatar {
     position: absolute;
-    top: -5.5em;
-    right: 0.5em;
+    top: -5.5rem;
+    right: 0.5rem;
     pointer-events: none;
 
     img {
@@ -27,25 +28,26 @@
     }
 
     .name {
-      color: #343a40;
+      color: $oc-gray-8;
       font-weight: bold;
     }
 
     .value {
-      color: #868e96;
+      color: $oc-gray-6;
       display: flex;
       justify-content: flex-end;
     }
 
     & + .item {
-      border-top: 1px solid #dee2e6;
+      border-top: 1px solid $oc-gray-2;
     }
   }
 
   .copyright {
     width: 100%;
     text-align: center;
-    color: #ced4da;
+    color: $oc-gray-4;
+    font-size: 0.6rem;
 
     span {
       margin: 0 0.5em;

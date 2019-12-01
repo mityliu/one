@@ -1,12 +1,12 @@
 .switch {
   width: 3em;
   height: 1.25em;
-  background-color: #ff6b6b;
+  background-color: $oc-red-5;
   border-radius: 30px;
   cursor: pointer;
   position: relative;
   display: block;
-  color: #f1f3f5;
+  color: $oc-gray-1;
 
   &-value {
     height: 1.25em;
@@ -16,8 +16,8 @@
     justify-content: center;
     position: absolute;
     box-sizing: border-box;
-    border: 5px #e03131 solid;
-    background-color: #e03131;
+    border: 5px $oc-red-8 solid;
+    background-color: $oc-red-8;
     border-radius: 50px;
     font-weight: bold;
     transition: margin-left 0.3s ease, width 0.3s ease,
@@ -25,12 +25,12 @@
   }
 
   &.is-active {
-    background-color: #51cf66;
+    background-color: $oc-green-5;
 
     .switch-value {
       margin-left: 2em;
-      background-color: #0ca678;
-      border-color: #0ca678;
+      background-color: $oc-teal-7;
+      border-color: $oc-teal-7;
     }
   }
 }
@@ -49,7 +49,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ff8787;
+    background-color: $oc-red-4;
     transform: scale(0, 1);
     transform-origin: left;
   }
@@ -72,7 +72,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f1f3f5;
+  background-color: $oc-gray-1;
   // transition: all 1.5s cubic-bezier(0.55, 0, 0.1, 1);
 
   &.is-loaded {

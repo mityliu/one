@@ -419,7 +419,7 @@ export default class Home extends Component {
           style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
         >
           <div class="search-row">
-            <div class="buttons">
+            <div class="buttons has-addons">
               {SS.map(s =>
                 s ? (
                   <button
@@ -515,7 +515,7 @@ export default class Home extends Component {
             <div
               class="item"
               onClick={() =>
-                this.openEditor('bgUrls', '背景图（支持多个链接，需刷新）')
+                this.openEditor('bgUrls', '背景图（可多图，需刷新）')
               }
             >
               <div class="name">
@@ -552,7 +552,7 @@ export default class Home extends Component {
 
             <div class="item">
               <button
-                class="button is-danger is-light is-fullwidth long-press is-reset"
+                class="button is-danger is-light is-fullwidth long-press is-reset is-small"
                 onMouseUp={() => {
                   clearTimeout(tmpTaker);
                 }}
@@ -634,7 +634,7 @@ export default class Home extends Component {
           </div>
         </div>
 
-        <nav class="actions-nav">
+        <nav class={(isEditorActive ? 'hide ' : '') + 'actions-nav'}>
           {isHomePanelActive ? (
             <div class="actions">
               <span class="icon" onClick={() => this.togglePanel('search')}>

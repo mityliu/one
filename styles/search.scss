@@ -2,10 +2,10 @@
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #fff;
+  background-color: $oc-gray-0;
 
   .field {
-    border-top: 1px solid #eee;
+    border-top: 1px solid $oc-gray-3;
 
     input {
       border: 0;
@@ -15,27 +15,22 @@
 
       &:focus {
         outline: none;
+        box-shadow: none;
       }
     }
   }
 
   .buttons {
-    display: flex;
     border-top: 1px solid #eee;
+    margin-bottom: 0;
 
     .button {
       flex-basis: 0;
       flex-grow: 1;
-      flex-shrink: 1;
-      padding: 0.5rem;
-      border-width: 1px;
-      cursor: pointer;
-      justify-content: center;
-      text-align: center;
-      white-space: nowrap;
-      border-color: transparent;
-      background-color: #effaf3;
-      color: #257942;
+      color: $oc-teal-7;
+      margin-bottom: 0;
+      border: none;
+      transition: color 1s;
 
       &:empty {
         display: none;
@@ -43,11 +38,6 @@
 
       & + button {
         border-left: 1px solid rgba(37, 121, 66, 0.15) !important;
-      }
-
-      &[disabled] {
-        opacity: 0.5;
-        cursor: not-allowed;
       }
     }
   }

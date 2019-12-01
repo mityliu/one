@@ -23,10 +23,10 @@
   .name {
     margin-top: 0.5em;
     background-color: rgba(239, 250, 243, 0.75);
-    color: #257942;
+    color: $oc-teal-7;
     border-radius: 4px;
     padding: 0.25em 0.5em 0.15em;
-    font-size: 0.8em;
+    font-size: 0.75em;
   }
 
   .avatar {
@@ -56,8 +56,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      color: #f1f3f5;
-      background-color: #2f9e44;
+      color: $oc-gray-1;
+      background-color: $oc-green-8;
 
       span {
         font-size: 1.5em;

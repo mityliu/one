@@ -5,22 +5,17 @@
   }
 
   .textarea {
-    padding: calc(0.75em - 1px);
-    width: calc(100% - 1.5em);
-    min-width: auto;
-    font-size: 1.1em;
     white-space: pre;
-    overflow-wrap: normal;
-    overflow-x: scroll;
+    min-height: 180px;
   }
 
   &-title {
     padding: 0 0.5em 0.5em;
     text-align: center;
     border-bottom: 1px solid #dee2e6;
-    margin-bottom: 1em;
+    margin-bottom: 0.5em;
     position: relative;
-    color: #868e96;
+    color: $oc-gray-6;
 
     .is-close {
       position: absolute;
@@ -32,12 +27,13 @@
   }
 
   &-hint {
-    color: #868e96;
+    color: $oc-gray-6;
     font-size: 0.85em;
+    margin-bottom: 0.5em;
 
     a {
       text-decoration: none;
-      color: #12b886;
+      color: $oc-teal-6;
       margin: 0 0.5em;
     }
   }
