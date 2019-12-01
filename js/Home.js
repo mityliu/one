@@ -639,15 +639,24 @@ export default class Home extends Component {
         <nav class={(isEditorActive ? 'hide ' : '') + 'actions-nav'}>
           {isHomePanelActive ? (
             <div class="actions">
-              <span class="icon" onClick={() => this.togglePanel('search')}>
+              <span
+                class="icon is-medium"
+                onClick={() => this.togglePanel('search')}
+              >
                 {searchIcon}
               </span>
 
-              <span class="icon" onClick={() => this.togglePanel('shortcut')}>
+              <span
+                class="icon is-medium"
+                onClick={() => this.togglePanel('shortcut')}
+              >
                 {shortcutIcon}
               </span>
 
-              <span class="icon" onClick={() => this.togglePanel('setting')}>
+              <span
+                class="icon is-medium"
+                onClick={() => this.togglePanel('setting')}
+              >
                 {settingIcon}
               </span>
             </div>

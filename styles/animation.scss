@@ -23,12 +23,44 @@
   }
 }
 
-@keyframes float-ttb-in {
+@keyframes fall-btt-in {
   0% {
-    animation-timing-function: cubic-bezier(0.2242, 0.7499, 0.3142, 0.8148);
-    transform: translate(0px, -14.925px) rotate(0deg) scale(1, 1) skewX(0deg)
+    animation-timing-function: cubic-bezier(0.7815, 0.1815, 0.7831, 0.7206);
+    transform: translate(0px, 49.75px) rotate(0deg) scale(1, 1) skewX(0deg)
       skewY(0deg);
-    opacity: 0.05;
+    opacity: 0;
+  }
+  51% {
+    animation-timing-function: cubic-bezier(0.1707, 0.3173, 0.3345, 0.9041);
+    transform: translate(0px, 2.65px) rotate(0deg) scale(1, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 1;
+  }
+  71% {
+    animation-timing-function: cubic-bezier(0.6191, 0.1797, 0.7336, 0.6732);
+    transform: translate(0px, 20px) rotate(0deg) scale(1, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes grow-rtl-in {
+  0% {
+    animation-timing-function: cubic-bezier(0.1006, 0.3357, -0.2396, 0.6703);
+    transform: translate(49.75px, 0px) rotate(0deg) scale(0.005, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 0;
+  }
+  2% {
+    animation-timing-function: cubic-bezier(0.2668, 0.6542, 0.5372, 0.8035);
+    transform: translate(31.2px, 0px) rotate(0deg) scale(0.376, 1) skewX(0deg)
+      skewY(0deg);
+    opacity: 1;
   }
   100% {
     transform: translate(0px, 0px) rotate(0deg) scale(1, 1) skewX(0deg)

@@ -5,7 +5,6 @@
   z-index: 99;
   color: $oc-gray-7;
   opacity: 0.9;
-  transition: all 0.2s;
 
   &.is-hide {
     opacity: 0;
@@ -25,17 +24,25 @@
     background-color: rgba(250, 250, 250, 0.5);
     border-radius: 50%;
     overflow: hidden;
-    padding: 0.25em;
+    padding: 0.4em;
     cursor: pointer;
+    @extend .grow-rtl-in;
   }
 
   .is-close {
     margin-right: 1em;
     opacity: 0.8;
     color: $oc-gray-6;
+    transition: opacity 0.1s;
 
     svg {
       transform: scale(0.85);
     }
   }
+}
+
+.grow-rtl-in {
+  transform: matrix(0.005, 0, 0, 1, 49.75, 0);
+  opacity: 0;
+  animation: 0.25s linear 0.25s 1 normal forwards running grow-rtl-in;
 }
