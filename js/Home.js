@@ -408,7 +408,7 @@ export default class Home extends Component {
     const shortcuts = parseShortcuts(links);
 
     const isHomePanelActive = activePanel === 'home';
-    // const isSearchPanelActive = activePanel === 'search';
+    const isSearchPanelActive = activePanel === 'search';
     // const isShortcutPanelActive = activePanel === 'shortcut';
     // const isSettingPanelActive = activePanel === 'setting';
 
@@ -418,34 +418,38 @@ export default class Home extends Component {
           class="page is-search has-mask"
           style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
         >
-          <div class="search-row">
-            <div class="buttons has-addons">
-              {SS.map(s =>
-                s ? (
-                  <button
-                    onClick={() => this.searchGo(s)}
-                    class="button is-info is-outlined"
-                    disabled={!q}
-                  >
-                    {s.name}
-                  </button>
-                ) : (
-                  ''
-                )
-              )}
-            </div>
+          {isSearchPanelActive ? (
+            <div class="search-row">
+              <div class="buttons has-addons">
+                {SS.map(s =>
+                  s ? (
+                    <button
+                      onClick={() => this.searchGo(s)}
+                      class="button is-info is-outlined"
+                      disabled={!q}
+                    >
+                      {s.name}
+                    </button>
+                  ) : (
+                    ''
+                  )
+                )}
+              </div>
 
-            <div class="field">
-              <input
-                class="input hide-clear"
-                type="search"
-                placeholder={searchHint}
-                ref={this.input}
-                value={q}
-                onInput={linkState(this, 'q')}
-              />
+              <div class="field">
+                <input
+                  class="input hide-clear"
+                  type="search"
+                  placeholder={searchHint}
+                  ref={this.input}
+                  value={q}
+                  onInput={linkState(this, 'q')}
+                />
+              </div>
             </div>
-          </div>
+          ) : (
+            ''
+          )}
         </section>
 
         <section
