@@ -597,7 +597,9 @@ export default class Home extends Component {
           )}
 
           {isHomeShortcuts ? (
-            <div class="shortcuts">{renderShortcuts(shortcuts, false)}</div>
+            <div class="shortcuts">
+              {renderShortcuts(shortcuts.slice(0, 10), false)}
+            </div>
           ) : (
             ''
           )}
@@ -641,13 +643,9 @@ export default class Home extends Component {
                 {searchIcon}
               </span>
 
-              {isHomeShortcuts ? (
-                ''
-              ) : (
-                <span class="icon" onClick={() => this.togglePanel('shortcut')}>
-                  {shortcutIcon}
-                </span>
-              )}
+              <span class="icon" onClick={() => this.togglePanel('shortcut')}>
+                {shortcutIcon}
+              </span>
 
               <span class="icon" onClick={() => this.togglePanel('setting')}>
                 {settingIcon}
