@@ -585,7 +585,7 @@ export default class Home extends Component {
           </div>
         </section>
 
-        <main
+        <section
           class="page is-home is-active"
           style={bgUrl ? 'background-image:url(' + bgUrl + ');' : ''}
         >
@@ -607,7 +607,7 @@ export default class Home extends Component {
           ) : (
             ''
           )}
-        </main>
+        </section>
 
         <div class={(isEditorActive ? 'is-active ' : '') + 'modal editor'}>
           <div
@@ -671,9 +671,9 @@ export default class Home extends Component {
           )}
         </nav>
 
-        <div class={(isLoaded ? 'is-loaded ' : '') + 'loading'}>
+        {/* <div class={(isLoaded ? 'is-loaded ' : '') + 'loading'}>
           <img src={loadingSvg} />
-        </div>
+        </div> */}
       </div>
     );
   }
