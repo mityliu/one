@@ -159,7 +159,9 @@ export default class Home extends Component {
   openSearchPanel = () => {
     this.openPanel('search');
 
-    this.input.current.focus();
+    setTimeout(() => {
+      this.input.current.focus();
+    }, 500);
   };
 
   openShortcutPanel = () => {
