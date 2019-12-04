@@ -629,7 +629,7 @@ export default class Home extends Component {
                 <div class="name">
                   <span>
                     {'One 插件' +
-                      (isOnePluginActive
+                      (isApp && isOnePluginActive
                         ? isOnePluginLatest
                           ? '（✔ 最新）'
                           : '（⚠️ 可更新）'
