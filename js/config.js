@@ -82,4 +82,5 @@ export const defaultsKey = Object.keys(defaults);
 
 export const ONE_PLUGIN_VERSION = '0.12.04';
 
-export const onePluginUrl = 'https://ecruos.gitee.io/oo/hiker/plugins/one.js';
+export const onePluginUrl =
+  'https://gitee.com/ecruos/oo/raw/master/hiker/plugins/one.js';
