@@ -6,10 +6,6 @@ https://magi.com/search?q=
 https://www.google.com/search?q=`;
 
 export const defaultLinks = `
-豆瓣
-https://movie.douban.com/tag/#/
-https://ae01.alicdn.com/kf/Hb073786e37264d5ebcbc5985944857e3J.png
-
 知乎
 https://www.zhihu.com
 https://ae01.alicdn.com/kf/Hcb0e2bedddc548b9912d9707eb6d265eq.png
@@ -25,6 +21,10 @@ https://ae01.alicdn.com/kf/Hc1ef47ebafcb4334993ea6eccc4ad9e6O.png
 爱奇艺
 https://www.iqiyi.com
 https://ae01.alicdn.com/kf/Ha2533399ad164061a3f6e0736846a888w.png
+
+豆瓣
+https://movie.douban.com/tag/#/
+https://ae01.alicdn.com/kf/Hb073786e37264d5ebcbc5985944857e3J.png
 
 优酷
 https://www.youku.com
