@@ -5,17 +5,18 @@ export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
 https://magi.com/search?q=
 https://www.google.com/search?q=`;
 
-export const defaultLinks = `知乎
+export const defaultLinks = `
+豆瓣
+https://movie.douban.com/tag/#/
+https://ae01.alicdn.com/kf/Hb073786e37264d5ebcbc5985944857e3J.png
+
+知乎
 https://www.zhihu.com
 https://ae01.alicdn.com/kf/Hcb0e2bedddc548b9912d9707eb6d265eq.png
 
 哔哩哔哩
 https://m.bilibili.com
 https://ae01.alicdn.com/kf/H3158a235430b47ec8c30af97340e528cL.png
-
-豆瓣
-https://m.douban.com
-https://ae01.alicdn.com/kf/Hb073786e37264d5ebcbc5985944857e3J.png
 
 腾讯
 https://m.v.qq.com
@@ -78,3 +79,7 @@ export const defaults = {
 };
 
 export const defaultsKey = Object.keys(defaults);
+
+export const ONE_PLUGIN_VERSION = '0.12.04';
+
+export const onePluginUrl = 'https://ecruos.gitee.io/oo/hiker/plugins/one.js';

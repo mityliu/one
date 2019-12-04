@@ -4,9 +4,18 @@ import linkState from 'linkstate';
 import $ from 'cash-dom';
 import store2 from 'store2';
 import { Arr } from 'suni';
+import copyText from 'copy-text-to-clipboard';
+import { toast } from 'bulma-toast';
 import loadingSvg from '../static/one-loading.svg';
 import { searchIcon, shortcutIcon, settingIcon, closeIcon } from './svgIcons';
-import { VERSION, STORE_PREFIX, defaults, defaultsKey } from './config';
+import {
+  VERSION,
+  STORE_PREFIX,
+  defaults,
+  defaultsKey,
+  onePluginUrl,
+  ONE_PLUGIN_VERSION
+} from './config';
 
 const store = store2.namespace(STORE_PREFIX);
 
@@ -132,6 +141,9 @@ export default class Home extends Component {
     isFirstChecked: false,
     isReseted: false,
     isLoaded: false,
+    isOneActive: false,
+    isOnePluginActive: false,
+    isOnePluginLatest: false,
     isYijuActive: defaults.isYijuActive,
     isHomeShortcuts: defaults.isHomeShortcuts,
     bgUrls: '',
@@ -141,10 +153,14 @@ export default class Home extends Component {
   closePanel = () => {
     this.setState({
       activePanel: 'home',
-      isReseted: false
+      isReseted: false,
+      isOneActive: false
     });
 
-    this.input.current.value = '';
+    if (this.input.current) {
+      this.input.current.value = '';
+    }
+
     this.setAppBarColor();
     this.reset();
   };
@@ -326,6 +342,21 @@ export default class Home extends Component {
     );
   };
 
+  toggleOne = () => {
+    const isOneActive = !this.state.isOneActive;
+    const params = {
+      isOneActive
+    };
+
+    const onePluginVersion = store('plugin.version');
+    if (isOneActive && onePluginVersion) {
+      params['isOnePluginActive'] = true;
+      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION === onePluginVersion;
+    }
+
+    this.setState(params);
+  };
+
   toggleYiju = () => {
     const isYijuActive = !this.state.isYijuActive;
 
@@ -346,6 +377,26 @@ export default class Home extends Component {
     this.setAppBarColorInPanel();
 
     store('isHomeShortcuts', isHomeShortcuts);
+  };
+
+  copyOnePlugin = () => {
+    this.setState({
+      isOneActive: false
+    });
+
+    toast({
+      message: '复制成功 (o˘◡˘o)',
+      type: 'is-success',
+      position: 'top-center',
+      dismissible: true,
+      pauseOnHover: true
+    });
+
+    copyText(
+      (this.state.isApp
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_One@'
+        : '') + onePluginUrl
+    );
   };
 
   componentDidMount() {
@@ -370,6 +421,19 @@ export default class Home extends Component {
         // TODO isHomeShortcuts
       }, 500);
     });
+
+    // tmp
+    const links = store('links');
+
+    if (links && links.includes('https://m.douban.com/')) {
+      store(
+        'links',
+        links.replace(
+          'https://m.douban.com/',
+          'https://movie.douban.com/tag/#/'
+        )
+      );
+    }
   }
 
   render(_, state) {
@@ -388,7 +452,11 @@ export default class Home extends Component {
       isLoaded,
       isYijuActive,
       isHomeShortcuts,
-      bgUrl
+      isOneActive,
+      bgUrl,
+      isApp,
+      isOnePluginActive,
+      isOnePluginLatest
     } = state;
 
     if (!isFirstChecked) {
@@ -556,6 +624,26 @@ export default class Home extends Component {
               </div>
             </div>
 
+            {isOneActive ? (
+              <div class="item">
+                <div class="name">
+                  <span>
+                    {'One 插件' +
+                      (isOnePluginActive
+                        ? isOnePluginLatest
+                          ? '（✔ 最新）'
+                          : '（⚠️ 可更新）'
+                        : '')}
+                  </span>
+                </div>
+                <div class="value" onClick={() => this.copyOnePlugin()}>
+                  <span>点击复制</span>
+                </div>
+              </div>
+            ) : (
+              ''
+            )}
+
             <div class="item">
               <button
                 class="button is-danger is-light is-fullwidth long-press is-reset is-small"
@@ -577,7 +665,7 @@ export default class Home extends Component {
               </button>
             </div>
 
-            <div class="item">
+            <div class="item" onClick={() => this.toggleOne()}>
               <div class="copyright">
                 One<span>-</span>
                 {VERSION}
