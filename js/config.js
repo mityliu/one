@@ -64,7 +64,7 @@ https://ae01.alicdn.com/kf/H6d21d4e77d6e44cb8417b2082d87e597O.png
 
 https://1090ys.com`;
 
-export const defaultHtmlTitle = '🐱 One';
+export const defaultHtmlTitle = '❀ One';
 export const defaultSearchHint = '搜索';
 export const defaultBgUrls = 'https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg';
 
