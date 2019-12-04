@@ -1,4 +1,4 @@
-export const VERSION = 'v0.12.01';
+export const VERSION = 'v0.12.04';
 export const STORE_PREFIX = 'One';
 
 export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
