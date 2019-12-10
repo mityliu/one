@@ -190,7 +190,7 @@ export default class Home extends Component {
     const onePluginVersion = store('plugin.version');
     if (onePluginVersion) {
       params['isOnePluginActive'] = true;
-      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION === onePluginVersion;
+      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION == onePluginVersion;
     }
 
     this.setState(params);
