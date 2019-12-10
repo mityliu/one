@@ -141,7 +141,6 @@ export default class Home extends Component {
     isFirstChecked: false,
     isReseted: false,
     isLoaded: false,
-    isOneActive: false,
     isOnePluginActive: false,
     isOnePluginLatest: false,
     isYijuActive: defaults.isYijuActive,
@@ -153,8 +152,7 @@ export default class Home extends Component {
   closePanel = () => {
     this.setState({
       activePanel: 'home',
-      isReseted: false,
-      isOneActive: false
+      isReseted: false
     });
 
     if (this.input.current) {
@@ -186,6 +184,16 @@ export default class Home extends Component {
 
   openSettingPanel = () => {
     this.openPanel('setting');
+
+    const params = {};
+
+    const onePluginVersion = store('plugin.version');
+    if (onePluginVersion) {
+      params['isOnePluginActive'] = true;
+      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION === onePluginVersion;
+    }
+
+    this.setState(params);
   };
 
   togglePanel = panelName => {
@@ -342,21 +350,6 @@ export default class Home extends Component {
     );
   };
 
-  toggleOne = () => {
-    const isOneActive = !this.state.isOneActive;
-    const params = {
-      isOneActive
-    };
-
-    const onePluginVersion = store('plugin.version');
-    if (isOneActive && onePluginVersion) {
-      params['isOnePluginActive'] = true;
-      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION === onePluginVersion;
-    }
-
-    this.setState(params);
-  };
-
   toggleYiju = () => {
     const isYijuActive = !this.state.isYijuActive;
 
@@ -380,10 +373,6 @@ export default class Home extends Component {
   };
 
   copyOnePlugin = () => {
-    this.setState({
-      isOneActive: false
-    });
-
     toast({
       message: '复制成功 (o˘◡˘o)',
       type: 'is-success',
@@ -452,7 +441,6 @@ export default class Home extends Component {
       isLoaded,
       isYijuActive,
       isHomeShortcuts,
-      isOneActive,
       bgUrl,
       isApp,
       isOnePluginActive,
@@ -624,25 +612,21 @@ export default class Home extends Component {
               </div>
             </div>
 
-            {isOneActive ? (
-              <div class="item">
-                <div class="name">
-                  <span>
-                    {'One 插件' +
-                      (isApp && isOnePluginActive
-                        ? isOnePluginLatest
-                          ? '（✔ 最新）'
-                          : '（⚠️ 可更新）'
-                        : '')}
-                  </span>
-                </div>
-                <div class="value" onClick={() => this.copyOnePlugin()}>
-                  <span>点击复制</span>
-                </div>
+            <div class="item">
+              <div class="name">
+                <span>
+                  {'One 插件' +
+                    (isApp && isOnePluginActive
+                      ? isOnePluginLatest
+                        ? '（✔ 最新）'
+                        : '（⚠️ 可更新）'
+                      : '')}
+                </span>
               </div>
-            ) : (
-              ''
-            )}
+              <div class="value" onClick={() => this.copyOnePlugin()}>
+                <span>点击复制</span>
+              </div>
+            </div>
 
             <div class="item">
               <button
@@ -665,7 +649,7 @@ export default class Home extends Component {
               </button>
             </div>
 
-            <div class="item" onClick={() => this.toggleOne()}>
+            <div class="item">
               <div class="copyright">
                 One<span>-</span>
                 {VERSION}
