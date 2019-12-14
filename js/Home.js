@@ -651,11 +651,11 @@ export default class Home extends Component {
             </div>
 
             <div class="item">
-              <div class="copyright">
+              <a href="https://gitee.com/ecruos/oo" class="copyright">
                 One<span>-</span>
                 {VERSION}
                 <span>-</span>(o˘◡˘o)
-              </div>
+              </a>
             </div>
           </div>
         </section>
