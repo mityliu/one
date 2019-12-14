@@ -13,7 +13,7 @@ import {
   STORE_PREFIX,
   defaults,
   defaultsKey,
-  onePluginUrl,
+  ooPluginUrl,
   ONE_PLUGIN_VERSION
 } from './config';
 
@@ -384,8 +384,8 @@ export default class Home extends Component {
     copyText(
       this.state.isApp
         ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_One@' +
-            onePluginUrl.replace('.js', '.hiker.js')
-        : onePluginUrl
+            ooPluginUrl.replace('.js', '.hiker.js')
+        : ooPluginUrl
     );
   };
 

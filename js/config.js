@@ -81,5 +81,5 @@ export const defaults = {
 
 export const defaultsKey = Object.keys(defaults);
 
-export const onePluginUrl =
-  'https://gitee.com/ecruos/oo/raw/master/scripts/one.movie.js';
+export const ooPluginUrl =
+  'https://gitee.com/ecruos/oo/raw/master/scripts/oo.movie.js';
