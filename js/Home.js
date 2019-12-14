@@ -383,7 +383,7 @@ export default class Home extends Component {
 
     copyText(
       this.state.isApp
-        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo_movie@' +
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@' +
             ooPluginUrl.replace('.js', '.hiker.js')
         : ooPluginUrl
     );
