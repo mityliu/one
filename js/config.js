@@ -1,5 +1,5 @@
 export const VERSION = 'v0.12.14';
-export const OO_PLUGIN_VERSION = '0.12.16';
+export const OO_PLUGIN_VERSION = '0.12.17';
 export const STORE_PREFIX = 'One';
 
 export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
