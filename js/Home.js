@@ -382,9 +382,10 @@ export default class Home extends Component {
     });
 
     copyText(
-      (this.state.isApp
-        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_One@'
-        : '') + onePluginUrl
+      this.state.isApp
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_One@' +
+            onePluginUrl.replace('.js', '.hiker.js')
+        : onePluginUrl
     );
   };
 

@@ -1,4 +1,4 @@
-export const VERSION = 'v0.12.04';
+export const VERSION = 'v0.12.14';
 export const ONE_PLUGIN_VERSION = '0.12.14';
 export const STORE_PREFIX = 'One';
 
@@ -82,4 +82,4 @@ export const defaults = {
 export const defaultsKey = Object.keys(defaults);
 
 export const onePluginUrl =
-  'https://gitee.com/ecruos/oo/raw/master/hiker/plugins/one.js';
+  'https://gitee.com/ecruos/oo/raw/master/scripts/one.movie.js';
