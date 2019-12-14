@@ -14,7 +14,7 @@ import {
   defaults,
   defaultsKey,
   ooPluginUrl,
-  ONE_PLUGIN_VERSION
+  OO_PLUGIN_VERSION
 } from './config';
 
 const store = store2.namespace(STORE_PREFIX);
@@ -141,8 +141,8 @@ export default class Home extends Component {
     isFirstChecked: false,
     isReseted: false,
     isLoaded: false,
-    isOnePluginActive: false,
-    isOnePluginLatest: false,
+    isOOPluginActive: false,
+    isOOPluginLatest: false,
     isYijuActive: defaults.isYijuActive,
     isHomeShortcuts: defaults.isHomeShortcuts,
     bgUrls: '',
@@ -189,8 +189,8 @@ export default class Home extends Component {
 
     const onePluginVersion = store('plugin.version');
     if (onePluginVersion) {
-      params['isOnePluginActive'] = true;
-      params['isOnePluginLatest'] = ONE_PLUGIN_VERSION == onePluginVersion;
+      params['isOOPluginActive'] = true;
+      params['isOOPluginLatest'] = OO_PLUGIN_VERSION == onePluginVersion;
     }
 
     this.setState(params);
@@ -383,7 +383,7 @@ export default class Home extends Component {
 
     copyText(
       this.state.isApp
-        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_One@' +
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo@' +
             ooPluginUrl.replace('.js', '.hiker.js')
         : ooPluginUrl
     );
@@ -444,8 +444,8 @@ export default class Home extends Component {
       isHomeShortcuts,
       bgUrl,
       isApp,
-      isOnePluginActive,
-      isOnePluginLatest
+      isOOPluginActive,
+      isOOPluginLatest
     } = state;
 
     if (!isFirstChecked) {
@@ -617,8 +617,8 @@ export default class Home extends Component {
               <div class="name">
                 <span>
                   {'One 插件' +
-                    (isApp && isOnePluginActive
-                      ? isOnePluginLatest
+                    (isApp && isOOPluginActive
+                      ? isOOPluginLatest
                         ? '（✔ 最新）'
                         : '（⚠️ 可更新）'
                       : '')}
