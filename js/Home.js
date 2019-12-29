@@ -616,7 +616,7 @@ export default class Home extends Component {
             <div class="item">
               <div class="name">
                 <span>
-                  {'One 插件' +
+                  {'oo.movie 插件' +
                     (isApp && isOOPluginActive
                       ? isOOPluginLatest
                         ? '（✔ 最新）'

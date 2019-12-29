@@ -1,4 +1,4 @@
-export const VERSION = 'v0.12.14';
+export const VERSION = 'v0.12.29';
 export const OO_PLUGIN_VERSION = '1.0.0';
 export const STORE_PREFIX = 'One';
 
