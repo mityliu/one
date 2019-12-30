@@ -1,5 +1,5 @@
 export const VERSION = 'v0.12.29';
-export const OO_PLUGIN_VERSION = '1.0.3';
+export const OO_PLUGIN_VERSION = '海阔视界最终版';
 export const STORE_PREFIX = 'One';
 
 export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
