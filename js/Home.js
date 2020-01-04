@@ -382,10 +382,9 @@ export default class Home extends Component {
     });
 
     copyText(
-      this.state.isApp
-        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@' +
-            ooPluginUrl.replace('.js', '.hiker.js')
-        : ooPluginUrl
+      (this.state.isApp
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@'
+        : '') + ooPluginUrl
     );
   };
 
@@ -616,7 +615,7 @@ export default class Home extends Component {
             <div class="item">
               <div class="name">
                 <span>
-                  {'oo.movie 插件' +
+                  {'oo.movie插件' +
                     (isApp && isOOPluginActive
                       ? isOOPluginLatest
                         ? '（✔ 最新）'
