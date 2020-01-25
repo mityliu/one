@@ -1,4 +1,4 @@
-export const VERSION = 'v0.12.29';
+export const VERSION = 'v1.0.0';
 export const OO_PLUGIN_VERSION = '20.2.0';
 export const STORE_PREFIX = 'One';
 
@@ -82,4 +82,4 @@ export const defaults = {
 export const defaultsKey = Object.keys(defaults);
 
 export const ooPluginUrl =
-  'https://gitee.com/ecruos/oo/raw/master/scripts/oo.movie.js';
+  'https://gitee.com/ecruos/oo/raw/master/scripts/oo.movie.hiker.js';
