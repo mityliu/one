@@ -31,4 +31,4 @@ function _typeof2(t){return(_typeof2="function"==typeof Symbol&&"symbol"==typeof
 },{}],"QvaY":[function(require,module,exports) {
 "use strict";require("../styles/main.scss");var e=require("preact"),r=u(require("./Home"));function u(e){return e&&e.__esModule?e:{default:e}}require("./stats"),(0,e.render)((0,e.h)(r.default,null),document.body);
 },{"../styles/main.scss":"LDUH","preact":"u8ui","./Home":"qPEW","./stats":"R7oY"}]},{},["QvaY"], null)
-//# sourceMappingURL=/one/js.818d3f27.js.map
+//# sourceMappingURL=/one/js.cb9f5f39.js.map

@@ -26,6 +26,8 @@
     overflow: hidden;
     padding: 0.4em;
     cursor: pointer;
+    height: 2rem !important;
+    width: 2rem !important;
     @extend .grow-rtl-in;
   }
 
