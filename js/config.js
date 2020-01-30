@@ -1,47 +1,51 @@
-export const VERSION = 'v1.0.0';
-export const OO_PLUGIN_VERSION = '20.2.3';
+export const VERSION = 'v1.1.30';
+export const OO_PLUGIN_VERSION = '20.2.6';
 export const STORE_PREFIX = 'One';
 
 export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
 https://magi.com/search?q=
-https://www.google.com/search?q=`;
+https://seeres.com/search?q=`;
 
 export const defaultLinks = `
-知乎
-https://www.zhihu.com
-https://ae01.alicdn.com/kf/Hcb0e2bedddc548b9912d9707eb6d265eq.png
-
 哔哩哔哩
 https://m.bilibili.com
-https://ae01.alicdn.com/kf/H3158a235430b47ec8c30af97340e528cL.png
+https://p.pstatp.com/origin/ffa200007bef770c2173
 
 腾讯
 https://m.v.qq.com
-https://ae01.alicdn.com/kf/Hc1ef47ebafcb4334993ea6eccc4ad9e6O.png
+https://p.pstatp.com/origin/fe8d0000e12947753279
 
 爱奇艺
-https://www.iqiyi.com
-https://ae01.alicdn.com/kf/Ha2533399ad164061a3f6e0736846a888w.png
-
-豆瓣
-https://movie.douban.com/tag/#/
-https://ae01.alicdn.com/kf/Hb073786e37264d5ebcbc5985944857e3J.png
+https://m.iqiyi.com
+https://p.pstatp.com/origin/ffb200022befd7546cf9
 
 优酷
 https://www.youku.com
-https://ae01.alicdn.com/kf/H26584a0bcea4483b88c4691ad0f52b45l.png
+https://p.pstatp.com/origin/dc10000328a35c1783aa
+
+豆瓣
+https://movie.douban.com/tag/#/
+https://p.pstatp.com/origin/fe400000ecc0fb4029b9
 
 芒果
 https://m.mgtv.com
-https://ae01.alicdn.com/kf/H2d4fab00849742b59f1537c2e18dfb2aF.png
+https://p.pstatp.com/origin/ff92000118928677b44e
+
+1905
+https://vip.1905.com
+https://p.pstatp.com/origin/fe490000f226d667ef4b
+
+PPTV
+https://m.pptv.com
+https://p.pstatp.com/origin/fefc00012044c4b75e20
 
 搜狐
 https://m.tv.sohu.com
-https://ae01.alicdn.com/kf/Hcc16c543a1d841feabb185e4cbade277D.png
+https://p.pstatp.com/origin/ffbd00011236bfb44f44
 
 乐视
 http://m.le.com
-https://ae01.alicdn.com/kf/H29a624c5ceb54105b8c1a83063af2bb50.png
+https://p.pstatp.com/origin/dc0d0005d77503c1b0d1
 
 奈菲
 https://www.nfmovies.com
@@ -49,20 +53,25 @@ https://www.nfmovies.com
 
 独播库
 https://www.duboku.net
-https://ae01.alicdn.com/kf/H98a0478d7d5a46eeac61a96ff736af19J.png
+https://p.pstatp.com/origin/ffd000007bf4469ff18c
 
 云播
 https://m.yunbtv.com
-https://ae01.alicdn.com/kf/Hc4f62465f0fc4601a9ae2bdf76364344a.png
+https://p.pstatp.com/origin/fef600008b52c011488c
 
 APP影院
 https://app.movie
-https://ae01.alicdn.com/kf/H8db7e4feaebb4557a0581de0c1fb77d7d.png
+https://p.pstatp.com/origin/fe690000c9141955bbac
 
 影迷窝
 https://www.yingmiwo.com
-https://ae01.alicdn.com/kf/H6d21d4e77d6e44cb8417b2082d87e597O.png
+https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
 
+残月
+http://ys.23yue.cn
+https://p.pstatp.com/origin/ff2c0000974edec72709
+
+1090
 https://1090ys.com`;
 
 export const defaultHtmlTitle = '❀ One';
@@ -71,7 +80,7 @@ export const defaultBgUrls = 'https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg';
 
 export const defaults = {
   searches: defaultSearches,
-  links: defaultLinks,
+  links: defaultLinks.trim(),
   htmlTitle: defaultHtmlTitle,
   searchHint: defaultSearchHint,
   bgUrls: defaultBgUrls,

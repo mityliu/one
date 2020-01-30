@@ -48,7 +48,7 @@ function parseSearches(searches) {
     });
 }
 
-const isImageRegex = /\.(ico|png|jpe?g|gif)/;
+const isImageRegex = /\.(ico|png|jpe?g|gif)|\.(pstatp|sogoucdn|rruu)\.(com|cn|net)|\/image\//;
 const isUrlRegex = /\/\/|\.\w+\./;
 const isColorRegex = /^(#\w+|rgb\()/;
 
@@ -615,7 +615,7 @@ export default class Home extends Component {
             <div class="item">
               <div class="name">
                 <span>
-                  {'oo.movie插件' +
+                  {'oo.movie' +
                     (isApp && isOOPluginActive
                       ? isOOPluginLatest
                         ? '（✔ 最新）'
