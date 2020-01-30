@@ -76,7 +76,7 @@ https://1090ys.com`;
 
 export const defaultHtmlTitle = '❀ One';
 export const defaultSearchHint = '搜索';
-export const defaultBgUrls = 'https://ps.ssl.qhmsg.com/t012ef745c77d34b194.jpg';
+export const defaultBgUrls = 'https://p.pstatp.com/origin/fed500016e75da70b04f';
 
 export const defaults = {
   searches: defaultSearches,
