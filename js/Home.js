@@ -700,7 +700,8 @@ export default class Home extends Component {
                 <p>清空内容会恢复成默认值。</p>
                 <p>
                   图床：<a href="http://aote.frqrjg.top/Ali">奥特曼</a> |{' '}
-                  <a href="https://photo.benzhu.xyz/Ali">笨猪</a>
+                  <a href="https://photo.benzhu.xyz/Ali">笨猪</a> |{' '}
+                  <a href="https://img.rruu.net">Rruu</a>
                 </p>
               </div>
               <textarea
