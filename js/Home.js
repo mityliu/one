@@ -373,19 +373,27 @@ export default class Home extends Component {
   };
 
   copyOnePlugin = () => {
-    toast({
-      message: '复制成功 (o˘◡˘o)',
-      type: 'is-success',
-      position: 'top-center',
-      dismissible: true,
-      pauseOnHover: true
-    });
-
-    copyText(
+    const rule =
       (this.state.isApp
         ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@'
-        : '') + ooPluginUrl
-    );
+        : '') + ooPluginUrl;
+
+    if (
+      this.state.isApp &&
+      !this.state.isOOPluginLatest &&
+      window.fy_bridge_app.importRule
+    ) {
+      window.fy_bridge_app.importRule(rule);
+    } else {
+      toast({
+        message: '复制成功 (o˘◡˘o)',
+        type: 'is-success',
+        position: 'top-center',
+        dismissible: true,
+        pauseOnHover: true
+      });
+      copyText(rule);
+    }
   };
 
   componentDidMount() {
