@@ -546,7 +546,7 @@ export default class Home extends Component {
         >
           <div class="panel">
             <div class="top-avatar">
-              <img data-src="https://ae01.alicdn.com/kf/H28e6b174bc904fc0bfad14aba7380b5dk.png" />
+              <img data-src="https://p.pstatp.com/origin/feec000097c4fcdf8548" />
             </div>
 
             <div
