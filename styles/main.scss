@@ -10,6 +10,12 @@
 @import 'shortcut';
 @import 'search';
 
+@media only screen and (max-width: 320px) {
+  body {
+    font-size: 14px;
+  }
+}
+
 .one {
   // preload
   background: url(../static/nature-sprite.png) no-repeat -9999px -9999px;

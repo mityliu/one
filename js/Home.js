@@ -290,8 +290,12 @@ export default class Home extends Component {
     const value = e.target.value;
 
     this.setState({ [key]: value });
+    const newValue = value.trim() ? value : defaults[key];
+    store(key, newValue);
 
-    store(key, value);
+    if (key === 'bgUrls') {
+      this.updateBgUrl(newValue);
+    }
   };
 
   tickResetConfirm = e => {
@@ -310,6 +314,24 @@ export default class Home extends Component {
     }, 1900);
   };
 
+  updateBgUrl = value => {
+    let urls = value
+      .trim()
+      .split(/\s*\n+\s*/)
+      .filter(v => /https?:/.test(v));
+    if (urls.length === 0) {
+      urls = defaults.bgUrls.trim().split(/\s*\n+\s*/);
+    }
+
+    if (urls.length > 1) {
+      Arr.shuffle(urls);
+    }
+
+    this.setState({
+      bgUrl: urls[0]
+    });
+  };
+
   syncStore = () => {
     defaultsKey.forEach(key => {
       let value = store(key);
@@ -326,18 +348,7 @@ export default class Home extends Component {
       }
 
       if (key === 'bgUrls' && !this.state.isLoaded) {
-        let urls = value.trim().split(/\s*\n+\s*/);
-        if (urls.length === 0) {
-          urls = defaults.bgUrls.trim().split(/\s*\n+\s*/);
-        }
-
-        if (urls.length > 1) {
-          Arr.shuffle(urls);
-        }
-
-        this.setState({
-          bgUrl: urls[0]
-        });
+        this.updateBgUrl(value);
       }
     });
   };
@@ -478,6 +489,10 @@ export default class Home extends Component {
     // const isShortcutPanelActive = activePanel === 'shortcut';
     // const isSettingPanelActive = activePanel === 'setting';
 
+    const yijuUrl = `https://v2.jinrishici.com/one.svg?font-size=${
+      window.screen.width > 320 ? '18' : '16'
+    }&color=whitesmoke`;
+
     return (
       <div class={(isLoaded ? 'is-loaded ' : '') + 'one'}>
         <section
@@ -585,7 +600,7 @@ export default class Home extends Component {
             <div
               class="item"
               onClick={() =>
-                this.openEditor('bgUrls', '背景图（可多图，需刷新）')
+                this.openEditor('bgUrls', '背景图（可多图，一行一个）')
               }
             >
               <div class="name">
@@ -673,10 +688,7 @@ export default class Home extends Component {
         >
           {isYijuActive ? (
             <div class="yiju">
-              <img
-                alt="今日诗词"
-                src="https://v2.jinrishici.com/one.svg?font-size=18&color=whitesmoke"
-              />
+              <img alt="今日诗词" src={yijuUrl} />
             </div>
           ) : (
             ''
@@ -705,7 +717,7 @@ export default class Home extends Component {
                 </span>
               </div>
               <div class="editor-hint">
-                <p>清空内容会恢复成默认值。</p>
+                <p>清空会恢复默认值。</p>
                 <p>
                   图床：<a href="http://aote.frqrjg.top/Ali">奥特曼</a> |{' '}
                   <a href="https://photo.benzhu.xyz/Ali">笨猪</a> |{' '}

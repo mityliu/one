@@ -12,7 +12,7 @@ $mask-play-timing: 0.35s;
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  background-color: $oc-gray-1;
+  background-color: $oc-gray-4; // 背景图片报错时，显示
   visibility: hidden;
   margin: 0;
   padding: 0;

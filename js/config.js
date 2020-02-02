@@ -1,4 +1,4 @@
-export const VERSION = 'v1.1.31';
+export const VERSION = 'v1.2.2';
 export const OO_PLUGIN_VERSION = '20.2.9';
 export const STORE_PREFIX = 'One';
 
@@ -76,7 +76,12 @@ https://1090ys.com`;
 
 export const defaultHtmlTitle = '❀ One';
 export const defaultSearchHint = '搜索';
-export const defaultBgUrls = 'https://p.pstatp.com/origin/fed500016e75da70b04f';
+export const defaultBgUrls = `
+https://p.pstatp.com/origin/fed500016e75da70b04f
+https://p.pstatp.com/origin/ff7f00019074312cb0a9
+https://p.pstatp.com/origin/ff500000b0325ea6daa0
+https://p.pstatp.com/origin/fe540000e39f24194551
+`;
 
 export const defaults = {
   searches: defaultSearches,
