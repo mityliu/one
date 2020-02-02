@@ -6,8 +6,7 @@ export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
 https://magi.com/search?q=
 https://seeres.com/search?q=`;
 
-export const defaultLinks = `
-哔哩哔哩
+export const defaultLinks = `哔哩哔哩
 https://m.bilibili.com
 https://p.pstatp.com/origin/ffa200007bef770c2173
 
@@ -72,12 +71,12 @@ http://ys.23yue.cn
 https://p.pstatp.com/origin/ff2c0000974edec72709
 
 1090
-https://1090ys.com`;
+https://1090ys.com
+`;
 
 export const defaultHtmlTitle = '❀ One';
 export const defaultSearchHint = '搜索';
-export const defaultBgUrls = `
-https://p.pstatp.com/origin/fed500016e75da70b04f
+export const defaultBgUrls = `https://p.pstatp.com/origin/fed500016e75da70b04f
 https://p.pstatp.com/origin/ff7f00019074312cb0a9
 https://p.pstatp.com/origin/ff500000b0325ea6daa0
 https://p.pstatp.com/origin/fe540000e39f24194551
