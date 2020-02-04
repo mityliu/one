@@ -1,4 +1,4 @@
-export const VERSION = 'v1.2.2';
+export const VERSION = 'v1.2.3';
 export const OO_PLUGIN_VERSION = '20.2.10';
 export const STORE_PREFIX = 'One';
 
@@ -46,32 +46,25 @@ https://p.pstatp.com/origin/ffbd00011236bfb44f44
 http://m.le.com
 https://p.pstatp.com/origin/dc0d0005d77503c1b0d1
 
-奈菲
-https://www.nfmovies.com
-#c3351b #fcc419
+1090
+https://1090ys.com
+https://p.pstatp.com/origin/fe690000c9141955bbac
 
-独播库
-https://www.duboku.net
+完美
+https://www.wanmeikk.me
 https://p.pstatp.com/origin/ffd000007bf4469ff18c
 
 云播
 https://m.yunbtv.com
 https://p.pstatp.com/origin/fef600008b52c011488c
 
-APP影院
-https://app.movie
-https://p.pstatp.com/origin/fe690000c9141955bbac
-
 影迷窝
 https://www.yingmiwo.com
 https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
 
-残月
-http://ys.23yue.cn
-https://p.pstatp.com/origin/ff2c0000974edec72709
-
-1090
-https://1090ys.com
+飞极速
+http://m.feijisu8.com
+#fff0f6 #f783ac
 `;
 
 export const defaultHtmlTitle = '❀ One';
