@@ -1,5 +1,5 @@
-export const VERSION = 'v1.2.3';
-export const OO_PLUGIN_VERSION = '20.2.16';
+export const VERSION = 'v20.2.18';
+export const OO_PLUGIN_VERSION = '20.2.18';
 export const STORE_PREFIX = 'One';
 
 export const defaultSearches = `多吉 https://www.dogedoge.com/results?q=
@@ -54,13 +54,13 @@ https://p.pstatp.com/origin/fe690000c9141955bbac
 https://www.wanmeikk.me
 https://p.pstatp.com/origin/ffd000007bf4469ff18c
 
+哔滴
+https://bde4.com
+https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
+
 云播
 https://m.yunbtv.com
 https://p.pstatp.com/origin/fef600008b52c011488c
-
-影迷窝
-https://www.yingmiwo.com
-https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
 
 飞极速
 http://m.feijisu8.com
