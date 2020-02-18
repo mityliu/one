@@ -27,6 +27,14 @@
     padding: 1em 0;
     transition: all 1s;
 
+    &.is-block {
+      display: block;
+    }
+
+    &.is-tip {
+      font-size: 0.85em;
+    }
+
     .name,
     .value {
       flex: 1;

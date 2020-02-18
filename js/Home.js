@@ -672,6 +672,16 @@ export default class Home extends Component {
               </button>
             </div>
 
+            {isApp ? (
+              <div class="item is-block is-tip">
+                海阔视界用户如果无法使用“<strong>点击编辑</strong>”，请在“
+                <strong>网络日志</strong>”里点一下<code>cdn.bootcss.com</code>
+                这个链接就能正常加载使用了。
+              </div>
+            ) : (
+              ''
+            )}
+
             <div class="item">
               <a href="https://gitee.com/ecruos/oo" class="copyright">
                 One<span>-</span>
