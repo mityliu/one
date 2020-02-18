@@ -30,22 +30,6 @@ https://p.pstatp.com/origin/fe400000ecc0fb4029b9
 https://m.mgtv.com
 https://p.pstatp.com/origin/ff92000118928677b44e
 
-1905
-https://vip.1905.com
-https://p.pstatp.com/origin/fe490000f226d667ef4b
-
-PPTV
-https://m.pptv.com
-https://p.pstatp.com/origin/fefc00012044c4b75e20
-
-搜狐
-https://m.tv.sohu.com
-https://p.pstatp.com/origin/ffbd00011236bfb44f44
-
-乐视
-http://m.le.com
-https://p.pstatp.com/origin/dc0d0005d77503c1b0d1
-
 1090
 https://1090ys.com
 https://p.pstatp.com/origin/fe690000c9141955bbac
@@ -61,6 +45,22 @@ https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
 云播
 https://m.yunbtv.com
 https://p.pstatp.com/origin/fef600008b52c011488c
+
+1905
+https://vip.1905.com
+https://p.pstatp.com/origin/fe490000f226d667ef4b
+
+PPTV
+https://m.pptv.com
+https://p.pstatp.com/origin/fefc00012044c4b75e20
+
+搜狐
+https://m.tv.sohu.com
+https://p.pstatp.com/origin/ffbd00011236bfb44f44
+
+乐视
+http://m.le.com
+https://p.pstatp.com/origin/dc0d0005d77503c1b0d1
 
 飞极速
 http://m.feijisu8.com
