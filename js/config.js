@@ -34,10 +34,6 @@ https://p.pstatp.com/origin/ff92000118928677b44e
 https://1090ys.com
 https://p.pstatp.com/origin/fe690000c9141955bbac
 
-完美
-https://www.wanmeikk.me
-https://p.pstatp.com/origin/ffd000007bf4469ff18c
-
 哔滴
 https://bde4.com
 https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
@@ -46,13 +42,13 @@ https://p.pstatp.com/origin/fee70000e89c6d7c5fbc
 https://m.yunbtv.com
 https://p.pstatp.com/origin/fef600008b52c011488c
 
-1905
-https://vip.1905.com
-https://p.pstatp.com/origin/fe490000f226d667ef4b
-
 PPTV
 https://m.pptv.com
 https://p.pstatp.com/origin/fefc00012044c4b75e20
+
+1905
+https://vip.1905.com
+https://p.pstatp.com/origin/fe490000f226d667ef4b
 
 搜狐
 https://m.tv.sohu.com
@@ -65,6 +61,10 @@ https://p.pstatp.com/origin/dc0d0005d77503c1b0d1
 飞极速
 http://m.feijisu8.com
 #fff0f6 #f783ac
+
+完美
+https://www.wanmeikk.me
+https://p.pstatp.com/origin/ffd000007bf4469ff18c
 `;
 
 export const defaultHtmlTitle = '❀ One';
