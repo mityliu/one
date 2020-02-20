@@ -384,9 +384,10 @@ export default class Home extends Component {
   };
 
   copyOnePlugin = () => {
-    const rule = this.state.isApp
-      ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@base64://ZXZhbChyZXF1ZXN0KCJodHRwczovL2dpdGVlLmNvbS9lY3J1b3Mvb28vcmF3L21hc3Rlci9zY3JpcHRzL29vLm1vdmllLmpzIikpOw=='
-      : ooPluginUrl;
+    const rule =
+      (this.state.isApp
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@'
+        : '') + ooPluginUrl;
 
     if (
       this.state.isApp &&
