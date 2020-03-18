@@ -1,6 +1,7 @@
 import '../styles/main.scss';
 import { h, render } from 'preact';
 import Router from 'preact-router';
+import { createHashHistory } from 'history';
 import Home from './Home';
 import Play from './Play';
 import './stats';
@@ -8,7 +9,7 @@ import './stats';
 render(<Home />, document.body);
 
 const Main = () => (
-  <Router>
+  <Router history={createHashHistory()}>
     <Home path="/" />
     <Play path="/play" />
   </Router>

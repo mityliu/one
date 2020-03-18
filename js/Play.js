@@ -41,7 +41,9 @@ export default class Home extends Component {
       // TODO isHomeShortcuts
     }, 500);
 
-    const q = new URLSearchParams(window.location.search);
+    const q = new URLSearchParams(
+      window.location.search || window.location.hash.replace(/.+?\?/, '?')
+    );
     const url = q.get('url');
 
     if (/^http/.test(url)) {
