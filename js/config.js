@@ -88,4 +88,4 @@ export const defaults = {
 export const defaultsKey = Object.keys(defaults);
 
 export const ooPluginUrl =
-  'https://gitee.com/ecruos/oo/raw/master/scripts/oo.movie.js';
+  'https://gitee.com/ecruos/oo/raw/master/scripts/miying.js';

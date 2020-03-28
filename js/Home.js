@@ -190,7 +190,8 @@ export default class Home extends Component {
     const onePluginVersion = store('plugin.version');
     if (onePluginVersion) {
       params['isOOPluginActive'] = true;
-      params['isOOPluginLatest'] = OO_PLUGIN_VERSION == onePluginVersion;
+      // params['isOOPluginLatest'] = OO_PLUGIN_VERSION == onePluginVersion;
+      params['isOOPluginLatest'] = true;
     }
 
     this.setState(params);
@@ -386,7 +387,7 @@ export default class Home extends Component {
   copyOnePlugin = () => {
     const rule =
       (this.state.isApp
-        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_oo.movie@'
+        ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_觅影@'
         : '') + ooPluginUrl;
 
     if (
@@ -638,7 +639,7 @@ export default class Home extends Component {
             <div class="item">
               <div class="name">
                 <span>
-                  {'oo.movie' +
+                  {'觅影' +
                     (isApp && isOOPluginActive
                       ? isOOPluginLatest
                         ? '（✔ 最新）'
