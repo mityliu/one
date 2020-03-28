@@ -390,22 +390,35 @@ export default class Home extends Component {
         ? '海阔视界 · 插件 (o˘◡˘o) ￥js_url￥global_觅影@'
         : '') + ooPluginUrl;
 
-    if (
-      this.state.isApp &&
-      !this.state.isOOPluginLatest &&
-      window.fy_bridge_app.importRule
-    ) {
+    toast({
+      message: '复制成功 (o˘◡˘o)',
+      type: 'is-success',
+      position: 'top-center',
+      dismissible: true,
+      pauseOnHover: true
+    });
+    copyText(rule);
+
+    if (this.state.isApp && window.fy_bridge_app.importRule) {
       window.fy_bridge_app.importRule(rule);
-    } else {
-      toast({
-        message: '复制成功 (o˘◡˘o)',
-        type: 'is-success',
-        position: 'top-center',
-        dismissible: true,
-        pauseOnHover: true
-      });
-      copyText(rule);
     }
+
+    // if (
+    //   this.state.isApp &&
+    //   !this.state.isOOPluginLatest &&
+    //   window.fy_bridge_app.importRule
+    // ) {
+    //   window.fy_bridge_app.importRule(rule);
+    // } else {
+    //   toast({
+    //     message: '复制成功 (o˘◡˘o)',
+    //     type: 'is-success',
+    //     position: 'top-center',
+    //     dismissible: true,
+    //     pauseOnHover: true
+    //   });
+    //   copyText(rule);
+    // }
   };
 
   componentDidMount() {
@@ -493,6 +506,16 @@ export default class Home extends Component {
     const yijuUrl = `https://v2.jinrishici.com/one.svg?font-size=${
       window.screen.width > 320 ? '18' : '16'
     }&color=whitesmoke`;
+
+    // const pluginItemTitle =
+    //   '觅影' +
+    //   (isApp && isOOPluginActive
+    //     ? isOOPluginLatest
+    //       ? '（✔ 最新）'
+    //       : '（⚠️ 可更新）'
+    //     : '');
+
+    const pluginItemTitle = '觅影';
 
     return (
       <div class={(isLoaded ? 'is-loaded ' : '') + 'one'}>
@@ -638,14 +661,7 @@ export default class Home extends Component {
 
             <div class="item">
               <div class="name">
-                <span>
-                  {'觅影' +
-                    (isApp && isOOPluginActive
-                      ? isOOPluginLatest
-                        ? '（✔ 最新）'
-                        : '（⚠️ 可更新）'
-                      : '')}
-                </span>
+                <span>{pluginItemTitle}</span>
               </div>
               <div class="value" onClick={() => this.copyOnePlugin()}>
                 <span>点击复制</span>
